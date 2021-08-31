@@ -12,6 +12,7 @@ import androidx.compose.ui.res.stringResource
 import com.masslany.justevaluateit.R
 import com.masslany.justevaluateit.ui.components.AppBar
 import com.masslany.justevaluateit.ui.components.BarcodeButton
+import com.masslany.justevaluateit.ui.components.RecentlyAdded
 import com.masslany.justevaluateit.ui.components.Search
 import com.masslany.justevaluateit.ui.theme.BarcodeButtonHeight
 import com.masslany.justevaluateit.ui.theme.SpaceMedium
@@ -61,7 +62,7 @@ fun DashboardScreen() {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(SpaceMedium),
+                .padding(start = SpaceMedium, end = SpaceMedium, top = SpaceMedium),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
@@ -84,6 +85,13 @@ fun DashboardScreen() {
 
             }
         }
+
+        RecentlyAdded(
+            modifier = Modifier
+                .padding(SpaceMedium)
+                .fillMaxWidth()
+                .fillMaxHeight()
+        )
     }
 }
 
