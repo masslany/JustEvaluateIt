@@ -3,6 +3,7 @@ package com.masslany.justevaluateit.ui.components
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -10,6 +11,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.masslany.justevaluateit.R
+import com.masslany.justevaluateit.ui.theme.Purple200
 
 @Composable
 fun BarcodeButton(
@@ -19,7 +21,8 @@ fun BarcodeButton(
     Button(
         modifier = modifier,
         onClick = onClick,
-        shape = RoundedCornerShape(16.dp)
+        shape = RoundedCornerShape(16.dp),
+        colors = ButtonDefaults.buttonColors(backgroundColor = Purple200)
     ) {
         val icon = if (MaterialTheme.colors.isLight) {
             painterResource(id = R.drawable.ic_barcode_dark)
