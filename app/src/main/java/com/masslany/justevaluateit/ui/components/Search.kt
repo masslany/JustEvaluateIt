@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
@@ -50,7 +51,11 @@ private fun SearchPlaceholder() {
 
 @Composable
 private fun TrailingSearchIcon() {
-    val icon = painterResource(id = R.drawable.ic_search)
+    val icon = if (MaterialTheme.colors.isLight) {
+        painterResource(id = R.drawable.ic_search_dark)
+    } else {
+        painterResource(id = R.drawable.ic_search_light)
+    }
     Image(
         painter = icon,
         contentDescription = stringResource(R.string.content_description_search_icon)

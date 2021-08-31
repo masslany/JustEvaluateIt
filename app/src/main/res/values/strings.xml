@@ -2,4 +2,5 @@
     <string name="app_name">Just Evaluate It</string>
     <string name="content_description_search_icon">Search icon</string>
     <string name="search_placeholder">Search for product…</string>
+    <string name="content_description_barcode_icon">Barcode icon</string>
 </resources>
