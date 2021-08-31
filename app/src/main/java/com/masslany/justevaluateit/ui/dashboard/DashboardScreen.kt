@@ -7,6 +7,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.masslany.justevaluateit.R
 import com.masslany.justevaluateit.ui.components.AppBar
@@ -23,7 +24,7 @@ fun DashboardScreen() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colors.background)
+            .background(color = MaterialTheme.colors.background)
     ) {
         AppBar(
             modifier = Modifier.padding(top = SpaceVeryLarge),
@@ -51,11 +52,38 @@ fun DashboardScreen() {
             BarcodeButton(
                 modifier = Modifier
                     .padding(end = SpaceMedium)
-                    .height(BarcodeButtonHeight),
+                    .height(BarcodeButtonHeight)
+                    .aspectRatio(1f),
                 onClick = {}
             )
         }
 
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(SpaceMedium),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+
+            DashboardTile(
+                modifier = Modifier
+                    .padding(end = SpaceMedium)
+                    .fillMaxWidth(0.5f),
+                text = "Add product",
+                icon = painterResource(id = R.drawable.ic_add),
+                contentDescription = ""
+            ) {
+
+            }
+            DashboardTile(
+                text = "Show products",
+                icon = painterResource(id = R.drawable.ic_list),
+                contentDescription = ""
+            ) {
+
+            }
+        }
     }
 }
 
