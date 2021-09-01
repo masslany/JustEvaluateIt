@@ -20,7 +20,9 @@ import com.masslany.justevaluateit.presentation.ui.theme.SpaceSmall
 
 @Composable
 fun RecentlyAdded(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    list: List<String> = emptyList(), // TODO: Have domain class here
+    onItemClick: (String) -> Unit = {} // TODO: Here as well
 ) {
     Column(
         modifier = modifier
