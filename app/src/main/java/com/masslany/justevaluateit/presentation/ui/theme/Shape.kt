@@ -1,4 +1,4 @@
-package com.masslany.justevaluateit.ui.theme
+package com.masslany.justevaluateit.presentation.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

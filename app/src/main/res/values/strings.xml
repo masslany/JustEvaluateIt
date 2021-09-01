@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Just Evaluate It</string>
+    <string name="content_description_search_icon">Search icon</string>
+    <string name="search_placeholder">Search for product…</string>
+    <string name="content_description_barcode_icon">Barcode icon</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="show_products">Show products</string>
+    <string name="add_product">Add product</string>
+    <string name="content_description_add_product">Add product tile</string>
+    <string name="content_description_show_products">Show products tile</string>
 </resources>

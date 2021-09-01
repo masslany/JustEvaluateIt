@@ -1,4 +1,4 @@
-package com.masslany.justevaluateit.ui.theme
+package com.masslany.justevaluateit.presentation.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
@@ -12,7 +12,12 @@ val Typography = Typography(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp
+    ),
+    h2 = TextStyle(
+        fontWeight = FontWeight.W700,
+        fontSize = 30.sp
     )
+
     /* Other default text styles to override
     button = TextStyle(
         fontFamily = FontFamily.Default,
