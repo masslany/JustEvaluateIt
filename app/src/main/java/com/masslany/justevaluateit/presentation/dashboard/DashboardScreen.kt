@@ -67,31 +67,19 @@ fun DashboardScreen() {
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
 
-            val addProductIcon = if(MaterialTheme.colors.isLight) {
-                painterResource(id = R.drawable.ic_add_dark)
-            } else {
-                painterResource(id = R.drawable.ic_add_light)
-            }
-
-            val showProductsIcon = if(MaterialTheme.colors.isLight) {
-                painterResource(id = R.drawable.ic_list_dark)
-            } else {
-                painterResource(id = R.drawable.ic_list_light)
-            }
-
             DashboardTile(
                 modifier = Modifier
                     .padding(end = SpaceMedium)
                     .fillMaxWidth(0.5f),
                 text = stringResource(R.string.add_product),
-                icon = addProductIcon,
+                icon = addProductIcon(),
                 contentDescription = stringResource(R.string.content_description_add_product)
             ) {
 
             }
             DashboardTile(
                 text = stringResource(R.string.show_products),
-                icon = showProductsIcon,
+                icon = showProductsIcon(),
                 contentDescription = stringResource(R.string.content_description_show_products),
             ) {
 
@@ -106,4 +94,19 @@ fun DashboardScreen() {
         )
     }
 }
+
+@Composable
+private fun addProductIcon() = if (MaterialTheme.colors.isLight) {
+    painterResource(id = R.drawable.ic_add_dark)
+} else {
+    painterResource(id = R.drawable.ic_add_light)
+}
+
+@Composable
+private fun showProductsIcon() = if (MaterialTheme.colors.isLight) {
+    painterResource(id = R.drawable.ic_list_dark)
+} else {
+    painterResource(id = R.drawable.ic_list_light)
+}
+
 
