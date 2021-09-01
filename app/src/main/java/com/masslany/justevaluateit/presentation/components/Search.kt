@@ -1,4 +1,4 @@
-package com.masslany.justevaluateit.ui.components
+package com.masslany.justevaluateit.presentation.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement

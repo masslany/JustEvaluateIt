@@ -1,4 +1,4 @@
-package com.masslany.justevaluateit.ui.theme
+package com.masslany.justevaluateit.presentation.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

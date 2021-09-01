@@ -1,4 +1,4 @@
-package com.masslany.justevaluateit.ui.components
+package com.masslany.justevaluateit.presentation.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -16,7 +16,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.masslany.justevaluateit.R
-import com.masslany.justevaluateit.ui.theme.RoundedCornerMedium
+import com.masslany.justevaluateit.presentation.ui.theme.RoundedCornerMedium
 
 @Composable
 fun BarcodeButton(

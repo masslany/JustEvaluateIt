@@ -1,4 +1,4 @@
-package com.masslany.justevaluateit.ui.dashboard
+package com.masslany.justevaluateit.presentation.dashboard
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -10,13 +10,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.masslany.justevaluateit.R
-import com.masslany.justevaluateit.ui.components.AppBar
-import com.masslany.justevaluateit.ui.components.BarcodeButton
-import com.masslany.justevaluateit.ui.components.RecentlyAdded
-import com.masslany.justevaluateit.ui.components.Search
-import com.masslany.justevaluateit.ui.theme.BarcodeButtonHeight
-import com.masslany.justevaluateit.ui.theme.SpaceMedium
-import com.masslany.justevaluateit.ui.theme.SpaceVeryLarge
+import com.masslany.justevaluateit.presentation.components.AppBar
+import com.masslany.justevaluateit.presentation.components.BarcodeButton
+import com.masslany.justevaluateit.presentation.components.RecentlyAdded
+import com.masslany.justevaluateit.presentation.components.Search
+import com.masslany.justevaluateit.presentation.ui.theme.BarcodeButtonHeight
+import com.masslany.justevaluateit.presentation.ui.theme.SpaceMedium
+import com.masslany.justevaluateit.presentation.ui.theme.SpaceVeryLarge
 
 @Composable
 fun DashboardScreen() {

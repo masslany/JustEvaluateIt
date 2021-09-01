@@ -1,4 +1,4 @@
-package com.masslany.justevaluateit.ui.components
+package com.masslany.justevaluateit.presentation.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -14,9 +14,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.masslany.justevaluateit.ui.theme.ButtonColor
-import com.masslany.justevaluateit.ui.theme.SpaceMedium
-import com.masslany.justevaluateit.ui.theme.SpaceSmall
+import com.masslany.justevaluateit.presentation.ui.theme.SurfaceDarkColor
+import com.masslany.justevaluateit.presentation.ui.theme.SpaceMedium
+import com.masslany.justevaluateit.presentation.ui.theme.SpaceSmall
 
 @Composable
 fun RecentlyAdded(
@@ -25,7 +25,7 @@ fun RecentlyAdded(
     Column(
         modifier = modifier
             .background(
-                color = ButtonColor,
+                color = MaterialTheme.colors.surface,
                 shape = RoundedCornerShape(24.dp)
             )
             .clip(RoundedCornerShape(24.dp))

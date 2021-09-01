@@ -1,4 +1,4 @@
-package com.masslany.justevaluateit.ui.theme
+package com.masslany.justevaluateit.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
@@ -9,4 +9,5 @@ val Teal200 = Color(0xFF03DAC5)
 
 val ButtonColorStart = Color(0xFF2D3855)
 val ButtonColorMiddle = Color(0xFF343E57)
-val ButtonColor = Color(0xFF384055)
+val SurfaceDarkColor = Color(0xFF384055)
+val SurfaceLightColor = Color(0xFFe0e0e0)

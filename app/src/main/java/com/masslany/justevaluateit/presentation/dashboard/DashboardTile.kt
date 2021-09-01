@@ -1,4 +1,4 @@
-package com.masslany.justevaluateit.ui.dashboard
+package com.masslany.justevaluateit.presentation.dashboard
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -15,8 +16,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.dp
-import com.masslany.justevaluateit.ui.theme.ButtonColor
-import com.masslany.justevaluateit.ui.theme.SpaceMedium
+import com.masslany.justevaluateit.presentation.ui.theme.SurfaceDarkColor
+import com.masslany.justevaluateit.presentation.ui.theme.SpaceMedium
 
 @Composable
 fun DashboardTile(
@@ -29,7 +30,7 @@ fun DashboardTile(
     Box(
         modifier = modifier
             .background(
-                color = ButtonColor,
+                color = MaterialTheme.colors.surface,
                 shape = RoundedCornerShape(24.dp)
             )
             .clip(RoundedCornerShape(24.dp))

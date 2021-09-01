@@ -1,4 +1,4 @@
-package com.masslany.justevaluateit.ui.theme
+package com.masslany.justevaluateit.presentation.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
@@ -12,7 +12,7 @@ private val DarkColorPalette = darkColors(
     primaryVariant = Purple700,
     secondary = Teal200,
     background = Color(0xFF1C253F),
-    surface = Color.DarkGray,
+    surface = SurfaceDarkColor,
 )
 
 private val LightColorPalette = lightColors(
@@ -20,7 +20,7 @@ private val LightColorPalette = lightColors(
     primaryVariant = Purple700,
     secondary = Teal200,
     background = Color.White,
-    surface = Color.White,
+    surface = SurfaceLightColor,
 
     /* Other default colors to override
     background = Color.White,
