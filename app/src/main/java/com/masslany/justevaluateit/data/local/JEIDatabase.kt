@@ -23,7 +23,7 @@ import com.masslany.justevaluateit.data.local.entity.relations.ReviewerProductCr
         ReviewerProductCrossRef::class
     ],
     version = 1,
-    exportSchema = false
+    exportSchema = true
 )
 abstract class JEIDatabase : RoomDatabase() {
 
