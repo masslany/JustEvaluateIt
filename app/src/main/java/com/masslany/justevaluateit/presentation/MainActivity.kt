@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import com.masslany.justevaluateit.R
+import com.masslany.justevaluateit.data.local.JEIDatabase
 import com.masslany.justevaluateit.presentation.dashboard.DashboardScreen
 import com.masslany.justevaluateit.presentation.ui.theme.JustEvaluateItTheme
 
@@ -14,6 +15,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val db = JEIDatabase.getInstance(this)
     }
 }
 
