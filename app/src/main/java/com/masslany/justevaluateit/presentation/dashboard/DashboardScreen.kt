@@ -71,16 +71,16 @@ fun DashboardScreen() {
                 modifier = Modifier
                     .padding(end = SpaceMedium)
                     .fillMaxWidth(0.5f),
-                text = "Add product",
+                text = stringResource(R.string.add_product),
                 icon = painterResource(id = R.drawable.ic_add),
-                contentDescription = ""
+                contentDescription = stringResource(R.string.content_description_add_product)
             ) {
 
             }
             DashboardTile(
-                text = "Show products",
+                text = stringResource(R.string.show_products),
                 icon = painterResource(id = R.drawable.ic_list),
-                contentDescription = ""
+                contentDescription = stringResource(R.string.content_description_show_products),
             ) {
 
             }
