@@ -34,3 +34,4 @@ captures/
 # Misc
 .externalNativeBuild
 .cxx
+/.idea/vcs.xml
