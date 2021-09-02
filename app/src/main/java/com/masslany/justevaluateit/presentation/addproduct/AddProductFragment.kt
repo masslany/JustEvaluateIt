@@ -8,6 +8,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.masslany.justevaluateit.presentation.ui.theme.JustEvaluateItTheme
 
 class AddProductFragment : Fragment() {
@@ -17,12 +18,18 @@ class AddProductFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        val navController = findNavController()
+
         return ComposeView(requireContext()).apply {
             setContent {
                 JustEvaluateItTheme {
                     // A surface container using the 'background' color from the theme
                     Surface(color = MaterialTheme.colors.background) {
-                        AddProductScreen()
+                        AddProductScreen(
+                            onNavigationIconClicked = {
+                                navController.navigateUp()
+                            }
+                        )
                     }
                 }
             }

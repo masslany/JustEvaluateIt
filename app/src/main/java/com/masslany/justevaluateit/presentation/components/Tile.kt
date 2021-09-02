@@ -20,9 +20,9 @@ import com.masslany.justevaluateit.presentation.ui.theme.SurfaceDarkColor
 import com.masslany.justevaluateit.presentation.ui.theme.SpaceMedium
 
 @Composable
-fun DashboardTile(
+fun Tile(
     modifier: Modifier = Modifier,
-    text: String,
+    text: String = "",
     icon: Painter,
     contentDescription: String,
     onClick: () -> Unit

@@ -30,7 +30,6 @@ fun DashboardScreen(
             .background(color = MaterialTheme.colors.background)
     ) {
         AppBar(
-            modifier = Modifier.padding(top = SpaceVeryLarge),
             title = {
                 Text(stringResource(R.string.dashboard), style = MaterialTheme.typography.h2)
             }
@@ -69,7 +68,7 @@ fun DashboardScreen(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
 
-            DashboardTile(
+            Tile(
                 modifier = Modifier
                     .padding(end = SpaceMedium)
                     .fillMaxWidth(0.5f),
@@ -79,7 +78,7 @@ fun DashboardScreen(
             ) {
                 navigateToAddProduct()
             }
-            DashboardTile(
+            Tile(
                 text = stringResource(R.string.show_products),
                 icon = showProductsIcon(),
                 contentDescription = stringResource(R.string.content_description_show_products),
