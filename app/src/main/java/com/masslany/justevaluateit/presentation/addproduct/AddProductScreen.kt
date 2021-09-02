@@ -27,7 +27,6 @@ fun AddProductScreen(
             .fillMaxSize()
     ) {
         AppBar(
-//            modifier = Modifier.padding(top = SpaceVeryLarge),
             title = {
                 Text(stringResource(R.string.add_product), style = MaterialTheme.typography.h2)
             },
