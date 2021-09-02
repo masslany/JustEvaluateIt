@@ -10,4 +10,6 @@
     <string name="content_description_show_products">Show products tile</string>
     <string name="content_description_add_product_tile">Add product photo tile</string>
     <string name="product_name_placeholder">Name</string>
+    <string name="rating_placeholder">Rating</string>
+    <string name="barcode_placeholder">Barcode</string>
 </resources>
