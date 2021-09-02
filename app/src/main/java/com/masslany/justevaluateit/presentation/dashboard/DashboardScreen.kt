@@ -19,7 +19,9 @@ import com.masslany.justevaluateit.presentation.ui.theme.SpaceMedium
 import com.masslany.justevaluateit.presentation.ui.theme.SpaceVeryLarge
 
 @Composable
-fun DashboardScreen() {
+fun DashboardScreen(
+    navigateToAddProduct: () -> Unit
+) {
     var searchValue by remember { mutableStateOf("") }
 
     Column(
@@ -75,7 +77,7 @@ fun DashboardScreen() {
                 icon = addProductIcon(),
                 contentDescription = stringResource(R.string.content_description_add_product)
             ) {
-
+                navigateToAddProduct()
             }
             DashboardTile(
                 text = stringResource(R.string.show_products),
