@@ -12,4 +12,5 @@
     <string name="product_name_placeholder">Name</string>
     <string name="rating_placeholder">Rating</string>
     <string name="barcode_placeholder">Barcode</string>
+    <string name="description_placeholder">Description</string>
 </resources>

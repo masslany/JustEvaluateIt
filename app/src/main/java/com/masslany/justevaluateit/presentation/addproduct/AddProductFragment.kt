@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.masslany.justevaluateit.presentation.ui.theme.JustEvaluateItTheme
 
+@ExperimentalComposeUiApi
 class AddProductFragment : Fragment() {
 
     override fun onCreateView(
