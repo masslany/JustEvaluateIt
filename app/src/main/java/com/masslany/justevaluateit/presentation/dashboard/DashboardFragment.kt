@@ -9,7 +9,9 @@ import androidx.compose.material.Surface
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import com.masslany.justevaluateit.presentation.ui.theme.JustEvaluateItTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DashboardFragment : Fragment() {
 
     override fun onCreateView(
