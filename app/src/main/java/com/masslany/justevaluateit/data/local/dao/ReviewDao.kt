@@ -1,8 +1,7 @@
-package com.masslany.justevaluateit.data.local.entity.dao
+package com.masslany.justevaluateit.data.local.dao
 
 import androidx.room.*
 import com.masslany.justevaluateit.data.local.entity.Review
-import com.masslany.justevaluateit.data.local.entity.Reviewer
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -22,4 +21,7 @@ interface ReviewDao {
 
     @Update
     fun updateReview(reviewer: Review)
+
+    @Delete
+    fun deleteReview(reviewer: Review)
 }
