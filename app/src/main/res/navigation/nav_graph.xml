@@ -8,4 +8,12 @@
         android:id="@+id/dashboardFragment"
         android:name="com.masslany.justevaluateit.presentation.dashboard.DashboardFragment"
         android:label="DashboardFragment" />
+    <fragment
+        android:id="@+id/onboardingFragment"
+        android:name="com.masslany.justevaluateit.presentation.onboarding.OnboardingFragment"
+        android:label="OnboardingFragment" >
+        <action
+            android:id="@+id/action_onboardingFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment" />
+    </fragment>
 </navigation>
