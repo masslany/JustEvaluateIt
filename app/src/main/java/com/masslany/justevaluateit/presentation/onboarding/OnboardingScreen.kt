@@ -20,6 +20,8 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.rememberPagerState
 import com.masslany.justevaluateit.R
+import com.masslany.justevaluateit.presentation.ui.theme.SurfaceDarkColor
+import com.masslany.justevaluateit.presentation.ui.theme.SurfaceLightColor
 import kotlinx.coroutines.launch
 
 @ExperimentalAnimationApi
@@ -52,15 +54,17 @@ fun OnboardingScreen(
                     }
                 }
                 1 -> {
-                    PageUI(page = onboardPages[page]) {
+                    PageReviewer() {
                         scope.launch {
                             pagerState.animateScrollToPage(page + 1)
                         }
                     }
                 }
                 2 -> {
-                    PageUI(page = onboardPages[page]) {
-
+                    PageReviewer() {
+                        scope.launch {
+                            pagerState.animateScrollToPage(page + 1)
+                        }
                     }
                 }
             }
@@ -72,7 +76,8 @@ fun OnboardingScreen(
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
                 .padding(16.dp),
-            activeColor = colorResource(R.color.purple_500)
+            inactiveColor = SurfaceDarkColor,
+            activeColor = SurfaceLightColor
         )
 
         AnimatedVisibility(visible = pagerState.currentPage == 2) {
