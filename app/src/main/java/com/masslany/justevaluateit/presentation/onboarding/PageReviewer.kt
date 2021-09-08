@@ -57,8 +57,12 @@ fun PageReviewer(
             )
             Text("Setup reviewers", fontSize = 22.sp, fontWeight = FontWeight.Bold)
 
+            Spacer(modifier = Modifier.size(SpaceMedium))
+            
             Column(
-                Modifier.fillMaxWidth(),
+                Modifier
+                    .fillMaxWidth()
+                    .padding(start = SpaceMedium),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -67,16 +71,15 @@ fun PageReviewer(
                         reviewer = reviewer,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(start = SpaceMedium)
                     )
                     Spacer(modifier = Modifier.size(SpaceMedium))
                 }
             }
 
             Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
+                modifier = Modifier
+                    .fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
             ) {
                 CircleButton(
                     modifier = Modifier,
@@ -98,10 +101,13 @@ fun PageReviewer(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center
                 ) {
+
+
                     TextField(
                         value = addReviewerFieldValue,
-                        onValueChange = onAddReviewerFieldValueChange
-                    )
+                        onValueChange = onAddReviewerFieldValueChange,
+
+                        )
                     Button(
                         onClick = {
                             onAddReviewerButtonClicked()

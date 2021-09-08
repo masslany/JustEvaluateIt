@@ -106,7 +106,8 @@ fun OnboardingScreen(
 
         }
 
-        val shouldShowNextPageButton = pagerState.currentPage == 0 || reviewers.isNotEmpty()
+        val shouldShowNextPageButton = pagerState.currentPage == 0 ||
+                (pagerState.currentPage == 1 && reviewers.isNotEmpty())
 
         this@Column.AnimatedVisibility(
             visible = shouldShowNextPageButton

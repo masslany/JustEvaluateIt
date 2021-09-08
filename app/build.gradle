@@ -114,7 +114,7 @@ dependencies {
 
     // Navigation
     androidTestImplementation "androidx.navigation:navigation-testing:$nav_version"
-    
+
     // Room
     testImplementation "androidx.room:room-testing:$room_version"
 
