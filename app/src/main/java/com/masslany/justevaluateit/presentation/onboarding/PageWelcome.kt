@@ -14,10 +14,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.masslany.justevaluateit.R
-import com.masslany.justevaluateit.presentation.components.CircleButton
 
 @Composable
-fun PageWelcome(onNextPageButtonPressed: () -> Unit) {
+fun PageWelcome() {
     Box(
         modifier = Modifier.fillMaxSize(),
     ) {
@@ -33,15 +32,6 @@ fun PageWelcome(onNextPageButtonPressed: () -> Unit) {
             )
             Text("Welcome to Just Evaluate It", fontSize = 22.sp, fontWeight = FontWeight.Bold)
             Text("We need to setup few things first")
-
-
         }
-        CircleButton(
-            modifier = Modifier
-                .align(Alignment.BottomCenter),
-            painter = painterResource(id = R.drawable.ic_arrow_forward_light),
-            onClick = onNextPageButtonPressed
-        )
     }
-
 }
