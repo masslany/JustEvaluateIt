@@ -14,6 +14,8 @@
         android:label="OnboardingFragment" >
         <action
             android:id="@+id/action_onboardingFragment_to_dashboardFragment"
-            app:destination="@id/dashboardFragment" />
+            app:destination="@id/dashboardFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

@@ -10,13 +10,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.NavOptions
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.rememberPagerState
 import com.masslany.justevaluateit.R
+import com.masslany.justevaluateit.data.local.entity.Category
 import com.masslany.justevaluateit.data.local.entity.Reviewer
 import com.masslany.justevaluateit.presentation.components.CircleButton
+import com.masslany.justevaluateit.presentation.components.RoundedButton
 import com.masslany.justevaluateit.presentation.ui.theme.SurfaceDarkColor
 import com.masslany.justevaluateit.presentation.ui.theme.SurfaceLightColor
 import kotlinx.coroutines.launch
@@ -32,14 +35,27 @@ fun OnboardingScreen(
     val reviewers = viewModel.reviewers.value
     val addReviewerFieldState = viewModel.addReviewerFieldState.value
 
+    val categories = viewModel.categories.value
+    val addCategoryFieldState = viewModel.addCategoryFieldState.value
+
     OnboardingScreen(
         onGettingStartedClick = {
-            navController.navigate(R.id.action_onboardingFragment_to_dashboardFragment)
+            val navOptions = NavOptions.Builder()
+                .setPopUpTo(R.id.dashboardFragment, true)
+                .build()
+
+            navController.navigate(
+                R.id.action_onboardingFragment_to_dashboardFragment
+            )
         },
         reviewers = reviewers,
         addReviewerFieldValue = addReviewerFieldState,
         onAddReviewerFieldValueChange = viewModel::onAddReviewerFieldChange,
-        onAddReviewerButtonClicked = viewModel::onAddReviewerButtonClicked
+        onAddReviewerButtonClicked = viewModel::onAddReviewerButtonClicked,
+        categories = categories,
+        addCategoryFieldValue = addCategoryFieldState,
+        onAddCategoryFieldValueChange = viewModel::onAddCategoryFieldChange,
+        onAddCategoryButtonClicked = viewModel::onAddCategoryButtonClicked,
     )
 }
 
@@ -52,6 +68,10 @@ fun OnboardingScreen(
     addReviewerFieldValue: String,
     onAddReviewerFieldValueChange: (String) -> Unit,
     onAddReviewerButtonClicked: () -> Unit,
+    categories: List<Category>,
+    addCategoryFieldValue: String,
+    onAddCategoryFieldValueChange: (String) -> Unit,
+    onAddCategoryButtonClicked: () -> Unit,
 ) {
     val pagerState = rememberPagerState(pageCount = 3)
     val scope = rememberCoroutineScope()
@@ -86,28 +106,27 @@ fun OnboardingScreen(
                         },
                         onAddReviewerButtonClicked = onAddReviewerButtonClicked
                     )
-
-
                 }
                 2 -> {
-//                    PageReviewer(
-//
-//                        addReviewerFieldValue = "",
-//                        onAddReviewerFieldValueChange = {},
-//                        onNextPageButtonPressed = {
-//                            scope.launch {
-//                                pagerState.animateScrollToPage(page + 1)
-//                            }
-//                        },
-//                        onAddReviewerButtonClicked = onAddReviewerButtonClicked
-//                    )
+                    PageCategory(
+                        categories = categories,
+                        addCategoryFieldValue = addCategoryFieldValue,
+                        onAddCategoryFieldValueChange = onAddCategoryFieldValueChange,
+                        onNextPageButtonPressed = {
+                            scope.launch {
+                                pagerState.animateScrollToPage(page + 1)
+                            }
+                        },
+                        onAddCategoryButtonClicked = onAddCategoryButtonClicked
+                    )
                 }
             }
-
         }
 
         val shouldShowNextPageButton = pagerState.currentPage == 0 ||
                 (pagerState.currentPage == 1 && reviewers.isNotEmpty())
+
+        val shouldShowGetStartedButton = pagerState.currentPage == 2 && categories.isNotEmpty()
 
         this@Column.AnimatedVisibility(
             visible = shouldShowNextPageButton
@@ -119,6 +138,18 @@ fun OnboardingScreen(
                     scope.launch {
                         pagerState.animateScrollToPage(pagerState.currentPage + 1)
                     }
+                }
+            )
+        }
+
+        this@Column.AnimatedVisibility(
+            visible = shouldShowGetStartedButton
+        ) {
+            RoundedButton(
+                modifier = Modifier,
+                text = "Get started",
+                onClick = {
+                    onGettingStartedClick()
                 }
             )
         }

@@ -15,10 +15,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.masslany.justevaluateit.R
-import com.masslany.justevaluateit.data.local.entity.Reviewer
+import com.masslany.justevaluateit.data.local.entity.Category
+import com.masslany.justevaluateit.presentation.components.CategoryItem
 import com.masslany.justevaluateit.presentation.components.CircleButton
 import com.masslany.justevaluateit.presentation.components.InputField
-import com.masslany.justevaluateit.presentation.components.ReviewerItem
 import com.masslany.justevaluateit.presentation.ui.theme.SpaceMedium
 import com.masslany.justevaluateit.presentation.ui.theme.SpaceVeryLarge
 import kotlinx.coroutines.delay
@@ -26,12 +26,12 @@ import kotlinx.coroutines.launch
 
 @ExperimentalAnimationApi
 @Composable
-fun PageReviewer(
-    reviewers: List<Reviewer>,
+fun PageCategory(
+    categories: List<Category>,
     onNextPageButtonPressed: () -> Unit,
-    addReviewerFieldValue: String,
-    onAddReviewerFieldValueChange: (String) -> Unit,
-    onAddReviewerButtonClicked: () -> Unit,
+    addCategoryFieldValue: String,
+    onAddCategoryFieldValueChange: (String) -> Unit,
+    onAddCategoryButtonClicked: () -> Unit,
 ) {
     var isAddReviewerFieldVisible by remember { mutableStateOf(false) }
     val scrollState = rememberScrollState()
@@ -50,11 +50,11 @@ fun PageReviewer(
         ) {
 
             Image(
-                painter = painterResource(id = R.drawable.onboarding_second_page),
+                painter = painterResource(id = R.drawable.onboarding_third_page),
                 contentDescription = "",
                 modifier = Modifier.size(350.dp)
             )
-            Text("Setup reviewers", fontSize = 22.sp, fontWeight = FontWeight.Bold)
+            Text("Setup categories", fontSize = 22.sp, fontWeight = FontWeight.Bold)
 
             Spacer(modifier = Modifier.size(SpaceMedium))
 
@@ -65,11 +65,12 @@ fun PageReviewer(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                reviewers.forEach { reviewer ->
-                    ReviewerItem(
-                        reviewer = reviewer,
+                categories.forEach { category ->
+                    CategoryItem(
+                        category = category,
                         modifier = Modifier
                             .fillMaxWidth()
+                            .align(Alignment.CenterHorizontally)
                     )
                     Spacer(modifier = Modifier.size(SpaceMedium))
                 }
@@ -91,7 +92,7 @@ fun PageReviewer(
                         }
                     }
                 )
-                Text("Add reviewer", fontSize = 22.sp)
+                Text("Add category", fontSize = 22.sp)
             }
 
             AnimatedVisibility(isAddReviewerFieldVisible) {
@@ -106,15 +107,15 @@ fun PageReviewer(
                             .padding(start = SpaceMedium, end = SpaceMedium)
                             .fillMaxWidth()
                             .weight(1f),
-                        value = addReviewerFieldValue,
-                        onValueChange = onAddReviewerFieldValueChange,
-                        placeholder = { Text("Enter reviewer's name") }
+                        value = addCategoryFieldValue,
+                        onValueChange = onAddCategoryFieldValueChange,
+                        placeholder = { Text("Enter category name") }
                     )
                     CircleButton(
                         modifier = Modifier.padding(end = SpaceMedium),
                         text = "Add",
                         onClick = {
-                            onAddReviewerButtonClicked()
+                            onAddCategoryButtonClicked()
                             isAddReviewerFieldVisible = false
                         }
                     )
