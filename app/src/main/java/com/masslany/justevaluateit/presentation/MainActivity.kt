@@ -1,15 +1,20 @@
 package com.masslany.justevaluateit.presentation
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import com.masslany.justevaluateit.R
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    private val viewModel: MainActivityViewModel by viewModels()
 
     @IdRes
     var startDestination: Int = 0
@@ -17,13 +22,24 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+    }
 
-        val runOnboarding = true
+    override fun onStart() {
+        super.onStart()
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.shouldShowOnboarding.collect { showOnboarding ->
+                handleNavigation(showOnboarding)
+            }
+        }
+    }
+
+    private fun handleNavigation(showOnboarding: Boolean) {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
         val navController = navHostFragment.navController
 
-        if (runOnboarding) {
+        if (showOnboarding) {
             startDestination = R.id.onboardingFragment
 
             val navOptions = NavOptions.Builder()

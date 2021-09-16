@@ -9,6 +9,7 @@ import com.masslany.justevaluateit.data.local.entity.Category
 import com.masslany.justevaluateit.data.local.entity.Reviewer
 import com.masslany.justevaluateit.domain.usecase.category.AddCategoryUseCase
 import com.masslany.justevaluateit.domain.usecase.category.GetAllCategoriesUseCase
+import com.masslany.justevaluateit.domain.usecase.onboarding.UpdateShowOnboardingUseCase
 import com.masslany.justevaluateit.domain.usecase.reviewer.AddReviewerUseCase
 import com.masslany.justevaluateit.domain.usecase.reviewer.GetAllReviewersUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,6 +22,7 @@ class OnboardingViewModel @Inject constructor(
     getAllReviewersUseCase: GetAllReviewersUseCase,
     private val addCategoryUseCase: AddCategoryUseCase,
     getAllCategoriesUseCase: GetAllCategoriesUseCase,
+    private val updateShowOnboardingUseCase: UpdateShowOnboardingUseCase,
 ) : ViewModel() {
 
     val reviewers = getAllReviewersUseCase.execute()
@@ -56,6 +58,12 @@ class OnboardingViewModel @Inject constructor(
         )
         addCategory(category)
         _addCategoryFieldState.value = ""
+    }
+
+    fun onGetStartedButtonClicked() {
+        viewModelScope.launch {
+            updateShowOnboardingUseCase.execute(false)
+        }
     }
 
     private fun addReviewer(reviewer: Reviewer) {

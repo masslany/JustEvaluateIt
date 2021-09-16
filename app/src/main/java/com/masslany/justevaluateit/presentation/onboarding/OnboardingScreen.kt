@@ -42,7 +42,9 @@ fun OnboardingScreen(
     val addCategoryFieldState = viewModel.addCategoryFieldState.value
 
     OnboardingScreen(
-        onGettingStartedClick = {
+        onGetStartedClick = {
+            viewModel.onGetStartedButtonClicked()
+
             navController.navigate(
                 R.id.action_onboardingFragment_to_dashboardFragment
             )
@@ -62,7 +64,7 @@ fun OnboardingScreen(
 @ExperimentalPagerApi
 @Composable
 fun OnboardingScreen(
-    onGettingStartedClick: () -> Unit,
+    onGetStartedClick: () -> Unit,
     reviewers: List<Reviewer>,
     addReviewerFieldValue: String,
     onAddReviewerFieldValueChange: (String) -> Unit,
@@ -138,7 +140,7 @@ fun OnboardingScreen(
                 modifier = Modifier,
                 text = stringResource(R.string.get_started),
                 onClick = {
-                    onGettingStartedClick()
+                    onGetStartedClick()
                 }
             )
         }
