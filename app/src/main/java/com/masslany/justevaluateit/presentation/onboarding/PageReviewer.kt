@@ -11,6 +11,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -50,10 +51,14 @@ fun PageReviewer(
 
             Image(
                 painter = painterResource(id = R.drawable.onboarding_second_page),
-                contentDescription = "",
+                contentDescription = stringResource(R.string.content_description_reviewers_screen_image),
                 modifier = Modifier.size(350.dp)
             )
-            Text("Setup reviewers", fontSize = 22.sp, fontWeight = FontWeight.Bold)
+            Text(
+                stringResource(R.string.setup_reviewers),
+                fontSize = 22.sp,
+                fontWeight = FontWeight.Bold
+            )
 
             Spacer(modifier = Modifier.size(SpaceMedium))
 
@@ -90,7 +95,7 @@ fun PageReviewer(
                         }
                     }
                 )
-                Text("Add reviewer", fontSize = 22.sp)
+                Text(stringResource(R.string.add_reviewer), fontSize = 22.sp)
             }
 
             AnimatedVisibility(isAddReviewerFieldVisible) {
@@ -107,16 +112,15 @@ fun PageReviewer(
                             .weight(1f),
                         value = addReviewerFieldValue,
                         onValueChange = onAddReviewerFieldValueChange,
-                        placeholder = { Text("Enter reviewer's name") }
+                        placeholder = { Text(stringResource(R.string.reviewers_name_placeholder)) }
                     )
                     CircleButton(
                         modifier = Modifier.padding(end = SpaceMedium),
-                        text = "Add",
+                        text = stringResource(R.string.add),
                         onClick = {
                             onAddReviewerButtonClicked()
                             isAddReviewerFieldVisible = false
-                        }
-                    )
+                        })
                 }
                 Spacer(modifier = Modifier.size(SpaceVeryLarge))
             }

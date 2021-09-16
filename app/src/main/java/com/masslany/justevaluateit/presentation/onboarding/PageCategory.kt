@@ -11,6 +11,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -50,10 +51,10 @@ fun PageCategory(
 
             Image(
                 painter = painterResource(id = R.drawable.onboarding_third_page),
-                contentDescription = "",
+                contentDescription = stringResource(id = R.string.content_description_categories_screen_image),
                 modifier = Modifier.size(350.dp)
             )
-            Text("Setup categories", fontSize = 22.sp, fontWeight = FontWeight.Bold)
+            Text(stringResource(R.string.setup_categories), fontSize = 22.sp, fontWeight = FontWeight.Bold)
 
             Spacer(modifier = Modifier.size(SpaceMedium))
 
@@ -91,7 +92,7 @@ fun PageCategory(
                         }
                     }
                 )
-                Text("Add category", fontSize = 22.sp)
+                Text(stringResource(R.string.add_category), fontSize = 22.sp)
             }
 
             AnimatedVisibility(isAddReviewerFieldVisible) {
@@ -108,11 +109,11 @@ fun PageCategory(
                             .weight(1f),
                         value = addCategoryFieldValue,
                         onValueChange = onAddCategoryFieldValueChange,
-                        placeholder = { Text("Enter category name") }
+                        placeholder = { Text(stringResource(R.string.category_name_placeholder)) }
                     )
                     CircleButton(
                         modifier = Modifier.padding(end = SpaceMedium),
-                        text = "Add",
+                        text = stringResource(id = R.string.add),
                         onClick = {
                             onAddCategoryButtonClicked()
                             isAddReviewerFieldVisible = false

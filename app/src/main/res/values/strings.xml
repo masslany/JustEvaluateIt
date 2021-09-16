@@ -1,12 +1,31 @@
 <resources>
     <string name="app_name">Just Evaluate It</string>
+
     <string name="content_description_search_icon">Search icon</string>
-    <string name="search_placeholder">Search for product…</string>
+    <string name="content_description_welcome_screen_image">Welcome screen image</string>
+    <string name="content_description_reviewers_screen_image">Onboarding reviewers image</string>
+    <string name="content_description_categories_screen_image">Onboarding category image</string>
     <string name="content_description_barcode_icon">Barcode icon</string>
+    <string name="content_description_add_product">Add product tile</string>
+    <string name="content_description_show_products">Show products tile</string>
+
+    <string name="search_placeholder">Search for product…</string>
+    <string name="reviewers_name_placeholder">Enter reviewer\'s name</string>
+    <string name="category_name_placeholder">Enter category name</string>
+
     <string name="dashboard">Dashboard</string>
     <string name="show_products">Show products</string>
     <string name="add_product">Add product</string>
-    <string name="content_description_add_product">Add product tile</string>
-    <string name="content_description_show_products">Show products tile</string>
+
+    <string name="welcome_to_app_name">Welcome to Just Evaluate It</string>
+    <string name="welcome_additional_text">We need to setup few things first</string>
+
+    <string name="setup_reviewers">Setup reviewers</string>
+    <string name="add_reviewer">Add reviewer</string>
+    <string name="add">Add</string>
+
+    <string name="setup_categories">Setup categories</string>
+    <string name="add_category">Add category</string>
+
     <string name="get_started">Get started</string>
 </resources>

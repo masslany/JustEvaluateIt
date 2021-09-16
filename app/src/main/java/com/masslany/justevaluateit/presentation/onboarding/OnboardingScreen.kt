@@ -22,6 +22,7 @@ import com.masslany.justevaluateit.data.local.entity.Category
 import com.masslany.justevaluateit.data.local.entity.Reviewer
 import com.masslany.justevaluateit.presentation.components.CircleButton
 import com.masslany.justevaluateit.presentation.components.RoundedButton
+import com.masslany.justevaluateit.presentation.ui.theme.SpaceMedium
 import com.masslany.justevaluateit.presentation.ui.theme.SurfaceDarkColor
 import com.masslany.justevaluateit.presentation.ui.theme.SurfaceLightColor
 import kotlinx.coroutines.launch
@@ -146,7 +147,7 @@ fun OnboardingScreen(
             pagerState = pagerState,
             modifier = Modifier
                 .align(Alignment.CenterHorizontally)
-                .padding(16.dp),
+                .padding(SpaceMedium),
             inactiveColor = SurfaceDarkColor,
             activeColor = SurfaceLightColor
         )

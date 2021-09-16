@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -27,11 +28,11 @@ fun PageWelcome() {
 
             Image(
                 painter = painterResource(id = R.drawable.onboarding_first_page),
-                contentDescription = "",
+                contentDescription = stringResource(R.string.content_description_welcome_screen_image),
                 modifier = Modifier.size(350.dp)
             )
-            Text("Welcome to Just Evaluate It", fontSize = 22.sp, fontWeight = FontWeight.Bold)
-            Text("We need to setup few things first")
+            Text(stringResource(R.string.welcome_to_app_name), fontSize = 22.sp, fontWeight = FontWeight.Bold)
+            Text(stringResource(R.string.welcome_additional_text))
         }
     }
 }
