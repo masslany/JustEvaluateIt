@@ -17,11 +17,11 @@ interface ReviewDao {
     fun getReviewsByReviewerId(reviewerId: Int): Flow<List<Review>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertReview(reviewer: Review)
+    suspend fun insertReview(reviewer: Review)
 
     @Update
-    fun updateReview(reviewer: Review)
+    suspend fun updateReview(reviewer: Review)
 
     @Delete
-    fun deleteReview(reviewer: Review)
+    suspend fun deleteReview(reviewer: Review)
 }
