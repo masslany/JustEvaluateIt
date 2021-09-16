@@ -4,13 +4,14 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.NavOptions
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
@@ -32,7 +33,7 @@ fun OnboardingScreen(
     viewModel: OnboardingViewModel,
     navController: NavController
 ) {
-    val reviewers = viewModel.reviewers.value
+    val reviewers by viewModel.reviewers.collectAsState(initial = emptyList())
     val addReviewerFieldState = viewModel.addReviewerFieldState.value
 
     val categories = viewModel.categories.value
@@ -40,10 +41,6 @@ fun OnboardingScreen(
 
     OnboardingScreen(
         onGettingStartedClick = {
-            val navOptions = NavOptions.Builder()
-                .setPopUpTo(R.id.dashboardFragment, true)
-                .build()
-
             navController.navigate(
                 R.id.action_onboardingFragment_to_dashboardFragment
             )

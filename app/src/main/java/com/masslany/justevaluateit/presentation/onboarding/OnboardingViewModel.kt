@@ -4,16 +4,22 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.masslany.justevaluateit.data.local.entity.Category
 import com.masslany.justevaluateit.data.local.entity.Reviewer
+import com.masslany.justevaluateit.domain.usecase.reviewer.AddReviewerUseCase
+import com.masslany.justevaluateit.domain.usecase.reviewer.GetAllReviewersUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class OnboardingViewModel @Inject constructor() : ViewModel() {
+class OnboardingViewModel @Inject constructor(
+    private val addReviewerUseCase: AddReviewerUseCase,
+    getAllReviewersUseCase: GetAllReviewersUseCase
+) : ViewModel() {
 
-    private val _reviewers: MutableState<MutableList<Reviewer>> = mutableStateOf(mutableListOf())
-    val reviewers: State<List<Reviewer>> = _reviewers
+    val reviewers = getAllReviewersUseCase.execute()
 
     private val _addReviewerFieldState: MutableState<String> = mutableStateOf("")
     val addReviewerFieldState: State<String> = _addReviewerFieldState
@@ -50,7 +56,9 @@ class OnboardingViewModel @Inject constructor() : ViewModel() {
     }
 
     private fun addReviewer(reviewer: Reviewer) {
-        _reviewers.value.add(reviewer)
+        viewModelScope.launch {
+            addReviewerUseCase.execute(reviewer)
+        }
     }
 
     private fun addCategory(category: Category) {
