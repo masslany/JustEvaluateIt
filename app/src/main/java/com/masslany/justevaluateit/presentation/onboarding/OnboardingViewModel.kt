@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.masslany.justevaluateit.data.local.entity.Category
 import com.masslany.justevaluateit.data.local.entity.Reviewer
+import com.masslany.justevaluateit.domain.usecase.category.AddCategoryUseCase
+import com.masslany.justevaluateit.domain.usecase.category.GetAllCategoriesUseCase
 import com.masslany.justevaluateit.domain.usecase.reviewer.AddReviewerUseCase
 import com.masslany.justevaluateit.domain.usecase.reviewer.GetAllReviewersUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +18,9 @@ import javax.inject.Inject
 @HiltViewModel
 class OnboardingViewModel @Inject constructor(
     private val addReviewerUseCase: AddReviewerUseCase,
-    getAllReviewersUseCase: GetAllReviewersUseCase
+    getAllReviewersUseCase: GetAllReviewersUseCase,
+    private val addCategoryUseCase: AddCategoryUseCase,
+    getAllCategoriesUseCase: GetAllCategoriesUseCase,
 ) : ViewModel() {
 
     val reviewers = getAllReviewersUseCase.execute()
@@ -24,8 +28,7 @@ class OnboardingViewModel @Inject constructor(
     private val _addReviewerFieldState: MutableState<String> = mutableStateOf("")
     val addReviewerFieldState: State<String> = _addReviewerFieldState
 
-    private val _categories: MutableState<MutableList<Category>> = mutableStateOf(mutableListOf())
-    val categories: State<List<Category>> = _categories
+    val categories = getAllCategoriesUseCase.execute()
 
     private val _addCategoryFieldState: MutableState<String> = mutableStateOf("")
     val addCategoryFieldState: State<String> = _addCategoryFieldState
@@ -62,6 +65,8 @@ class OnboardingViewModel @Inject constructor(
     }
 
     private fun addCategory(category: Category) {
-        _categories.value.add(category)
+        viewModelScope.launch {
+            addCategoryUseCase.execute(category)
+        }
     }
 }

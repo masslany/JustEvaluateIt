@@ -28,7 +28,6 @@ import kotlinx.coroutines.launch
 @Composable
 fun PageReviewer(
     reviewers: List<Reviewer>,
-    onNextPageButtonPressed: () -> Unit,
     addReviewerFieldValue: String,
     onAddReviewerFieldValueChange: (String) -> Unit,
     onAddReviewerButtonClicked: () -> Unit,

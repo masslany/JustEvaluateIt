@@ -10,6 +10,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.google.accompanist.pager.ExperimentalPagerApi
@@ -36,7 +37,7 @@ fun OnboardingScreen(
     val reviewers by viewModel.reviewers.collectAsState(initial = emptyList())
     val addReviewerFieldState = viewModel.addReviewerFieldState.value
 
-    val categories = viewModel.categories.value
+    val categories by viewModel.categories.collectAsState(initial = emptyList())
     val addCategoryFieldState = viewModel.addCategoryFieldState.value
 
     OnboardingScreen(
@@ -96,11 +97,6 @@ fun OnboardingScreen(
                         reviewers = reviewers,
                         addReviewerFieldValue = addReviewerFieldValue,
                         onAddReviewerFieldValueChange = onAddReviewerFieldValueChange,
-                        onNextPageButtonPressed = {
-                            scope.launch {
-                                pagerState.animateScrollToPage(page + 1)
-                            }
-                        },
                         onAddReviewerButtonClicked = onAddReviewerButtonClicked
                     )
                 }
@@ -109,11 +105,6 @@ fun OnboardingScreen(
                         categories = categories,
                         addCategoryFieldValue = addCategoryFieldValue,
                         onAddCategoryFieldValueChange = onAddCategoryFieldValueChange,
-                        onNextPageButtonPressed = {
-                            scope.launch {
-                                pagerState.animateScrollToPage(page + 1)
-                            }
-                        },
                         onAddCategoryButtonClicked = onAddCategoryButtonClicked
                     )
                 }
@@ -144,7 +135,7 @@ fun OnboardingScreen(
         ) {
             RoundedButton(
                 modifier = Modifier,
-                text = "Get started",
+                text = stringResource(R.string.get_started),
                 onClick = {
                     onGettingStartedClick()
                 }

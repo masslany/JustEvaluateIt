@@ -28,7 +28,6 @@ import kotlinx.coroutines.launch
 @Composable
 fun PageCategory(
     categories: List<Category>,
-    onNextPageButtonPressed: () -> Unit,
     addCategoryFieldValue: String,
     onAddCategoryFieldValueChange: (String) -> Unit,
     onAddCategoryButtonClicked: () -> Unit,
