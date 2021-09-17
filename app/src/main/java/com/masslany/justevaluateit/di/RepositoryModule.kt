@@ -1,10 +1,7 @@
 package com.masslany.justevaluateit.di
 
 import com.masslany.justevaluateit.data.local.JEIDatabase
-import com.masslany.justevaluateit.domain.repository.CategoryRepository
-import com.masslany.justevaluateit.domain.repository.CategoryRepositoryImpl
-import com.masslany.justevaluateit.domain.repository.ReviewerRepository
-import com.masslany.justevaluateit.domain.repository.ReviewerRepositoryImpl
+import com.masslany.justevaluateit.domain.repository.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -29,6 +26,14 @@ class RepositoryModule {
         database: JEIDatabase
     ): ReviewerRepository {
         return ReviewerRepositoryImpl(database)
+    }
+
+    @Provides
+    @Singleton
+    fun provideProductRepository(
+        database: JEIDatabase
+    ): ProductRepository {
+        return ProductRepositoryImpl(database)
     }
 
 }
