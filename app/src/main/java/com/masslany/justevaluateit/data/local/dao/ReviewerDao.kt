@@ -14,11 +14,11 @@ interface ReviewerDao {
     fun getReviewerById(reviewerId: Int): Flow<Reviewer>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertReviewer(reviewer: Reviewer)
+    suspend fun insertReviewer(reviewer: Reviewer)
 
     @Update
-    fun updateReviewer(reviewer: Reviewer)
+    suspend fun updateReviewer(reviewer: Reviewer)
 
     @Delete
-    fun deleteReviewer(reviewer: Reviewer)
+    suspend fun deleteReviewer(reviewer: Reviewer)
 }

@@ -17,11 +17,11 @@ interface ProductDao {
     fun getAllProductsWithCategory(categoryId: Int): Flow<List<Product>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertProduct(product: Product)
+    suspend fun insertProduct(product: Product)
 
     @Update
-    fun updateProduct(product: Product)
+    suspend fun updateProduct(product: Product)
 
     @Delete
-    fun deleteProduct(product: Product)
+    suspend fun deleteProduct(product: Product)
 }
