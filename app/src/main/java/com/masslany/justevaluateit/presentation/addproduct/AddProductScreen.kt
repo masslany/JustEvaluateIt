@@ -20,7 +20,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.masslany.justevaluateit.R
+import com.masslany.justevaluateit.data.local.entity.Category
 import com.masslany.justevaluateit.presentation.components.AppBar
 import com.masslany.justevaluateit.presentation.components.BarcodeButton
 import com.masslany.justevaluateit.presentation.dashboard.Tile
@@ -28,10 +30,39 @@ import com.masslany.justevaluateit.presentation.ui.theme.BarcodeButtonHeight
 import com.masslany.justevaluateit.presentation.ui.theme.PurpleGradientBrush
 import com.masslany.justevaluateit.presentation.ui.theme.SpaceMedium
 
+
 @ExperimentalComposeUiApi
 @Composable
 fun AddProductScreen(
-    onNavigationIconClicked: () -> Unit
+    navController: NavController,
+    viewModel: AddProductViewModel,
+) {
+    val productNameFieldState by viewModel.productNameFieldState
+    val barcodeFieldState by viewModel.barcodeFieldState
+
+    val categories by viewModel.categories.collectAsState(initial = emptyList())
+
+    AddProductScreen(
+        onNavigationIconClicked = { },
+        categories = categories,
+        productNameFieldState = productNameFieldState,
+        onProductNameFieldChanged = viewModel::onProductNameFieldChange,
+        barcodeFieldState = barcodeFieldState,
+        onBarcodeFieldChanged = viewModel::onBarcodeFieldChange,
+        onSaveProductButtonClicked = viewModel::onSaveProductButtonClicked
+    )
+}
+
+@ExperimentalComposeUiApi
+@Composable
+fun AddProductScreen(
+    onNavigationIconClicked: () -> Unit,
+    categories: List<Category> = emptyList(),
+    productNameFieldState: String,
+    onProductNameFieldChanged: (String) -> Unit,
+    barcodeFieldState: String,
+    onBarcodeFieldChanged: (String) -> Unit,
+    onSaveProductButtonClicked: () -> Unit,
 ) {
     val columnScrollState = rememberScrollState()
     Box(modifier = Modifier.fillMaxSize()) {
@@ -62,12 +93,15 @@ fun AddProductScreen(
                 ) {
 
                 }
-                Column {
+                Column(
+                    modifier = Modifier
+                        .padding(top = SpaceMedium)
+                ) {
                     ProductNameField(
                         modifier = Modifier
-                            .padding(top = SpaceMedium, end = SpaceMedium),
-                        value = "",
-                        onValueChange = {}
+                            .padding(end = SpaceMedium),
+                        value = productNameFieldState,
+                        onValueChange = onProductNameFieldChanged
                     )
                     Row(
                         verticalAlignment = Alignment.CenterVertically
@@ -76,8 +110,8 @@ fun AddProductScreen(
                             modifier = Modifier
                                 .padding(top = SpaceMedium, end = SpaceMedium)
                                 .weight(1f),
-                            value = "",
-                            onValueChange = {}
+                            value = barcodeFieldState,
+                            onValueChange = onBarcodeFieldChanged
                         )
                         BarcodeButton(
                             modifier = Modifier
@@ -95,10 +129,9 @@ fun AddProductScreen(
             CategorySpinner(
                 modifier = Modifier.padding(
                     start = SpaceMedium,
-                    top = SpaceMedium,
                     end = SpaceMedium
                 ),
-                items = listOf("Food", "Drink", "Games"),
+                items = categories
             ) {
 
             }
@@ -126,7 +159,7 @@ fun AddProductScreen(
                 .height(45.dp)
                 .align(Alignment.BottomCenter)
         ) {
-
+            onSaveProductButtonClicked()
         }
     }
 
@@ -158,6 +191,8 @@ private fun ProductNameField(
                 disabledIndicatorColor = Color.Transparent
             ),
             shape = CircleShape,
+            maxLines = 1,
+            singleLine = true,
         )
     }
 }
@@ -192,7 +227,9 @@ private fun ProductBarcodeField(
             shape = CircleShape,
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Number
-            )
+            ),
+            maxLines = 1,
+            singleLine = true,
         )
     }
 }
@@ -216,7 +253,9 @@ private fun DescriptionField(
         TextField(
             value = value,
             onValueChange = onValueChange,
-            modifier = Modifier.fillMaxWidth().height(200.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(200.dp),
             placeholder = { DescriptionPlaceholder() },
             colors = TextFieldDefaults.textFieldColors(
                 disabledTextColor = Color.Transparent,
@@ -243,13 +282,13 @@ private fun DescriptionPlaceholder() {
 @Composable
 fun CategorySpinner(
     modifier: Modifier,
-    items: List<String>,
-    onTitleSelected: (String) -> Unit
+    items: List<Category>,
+    onTitleSelected: (Category) -> Unit
 ) {
-    val allItems = listOf(
-        "All categories"
-    ) + items
-    val text = rememberSaveable { mutableStateOf(allItems[0]) }
+    if (items.isEmpty())
+        return
+
+    val text = rememberSaveable { mutableStateOf(items[0].name) }
     val isOpen = rememberSaveable { mutableStateOf(false) }
     val openCloseOfDropDownList: (Boolean) -> Unit = {
         isOpen.value = it
@@ -262,17 +301,19 @@ fun CategorySpinner(
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
-            CategoryField(value = text.value, onValueChange = { onTitleSelected(it) })
+            CategoryField(value = text.value, onValueChange = { text.value = it })
         }
 
         DropDownList(
-            modifier = modifier,
+            modifier = Modifier,
+//                .padding(start = SpaceMedium, end = SpaceMedium)
+//                .fillMaxWidth(),
             requestToOpen = isOpen.value,
-            list = allItems,
+            list = items,
             openCloseOfDropDownList,
-            selectedString = {
+            selectedItem = {
                 onTitleSelected(it)
-                text.value = it
+                text.value = it.name
             }
         )
 
@@ -291,9 +332,9 @@ fun CategorySpinner(
 fun DropDownList(
     modifier: Modifier,
     requestToOpen: Boolean = false,
-    list: List<String>,
+    list: List<Category>,
     request: (Boolean) -> Unit,
-    selectedString: (String) -> Unit
+    selectedItem: (Category) -> Unit
 ) {
     DropdownMenu(
         modifier = modifier,
@@ -305,11 +346,11 @@ fun DropDownList(
                 modifier = Modifier.fillMaxWidth(),
                 onClick = {
                     request(false)
-                    selectedString(item)
+                    selectedItem(item)
                 }
             ) {
                 Text(
-                    item,
+                    item.name,
                     modifier = Modifier.wrapContentWidth()
                 )
             }
