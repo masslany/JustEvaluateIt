@@ -19,13 +19,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.masslany.justevaluateit.R
 import com.masslany.justevaluateit.presentation.components.AppBar
 import com.masslany.justevaluateit.presentation.components.BarcodeButton
-import com.masslany.justevaluateit.presentation.components.Reviewer
-import com.masslany.justevaluateit.presentation.components.Reviewers
 import com.masslany.justevaluateit.presentation.dashboard.Tile
 import com.masslany.justevaluateit.presentation.ui.theme.BarcodeButtonHeight
 import com.masslany.justevaluateit.presentation.ui.theme.PurpleGradientBrush
@@ -95,30 +92,6 @@ fun AddProductScreen(
 
             }
 
-            Row(
-                modifier = Modifier
-                    .padding(start = SpaceMedium, end = SpaceMedium),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                var rating by remember { mutableStateOf("") }
-//            RatingBar(
-//                value = rating,
-//                onValueChange = {
-//                    rating = it
-//                },
-//                numStars = 10,
-//                onRatingChanged = {},
-////                modifier = Modifier.weight(1f, true)
-//            )
-                Rating(
-                    value = rating, onValueChange = {
-                        rating = it
-                    }, modifier = Modifier
-//                    .weight(1.0f, true)
-                        .fillMaxWidth()
-                )
-            }
-
             CategorySpinner(
                 modifier = Modifier.padding(
                     start = SpaceMedium,
@@ -141,23 +114,6 @@ fun AddProductScreen(
                 ),
                 value = description,
                 onValueChange = { description = it }
-            )
-
-            Reviewers(
-                items = listOf(
-                    Reviewer(0, "Abc"),
-                    Reviewer(1, "Fdfsdf"),
-                    Reviewer(2, "afsdf"),
-                    Reviewer(3, "ofdsfsdfsdfdfsadfasdfasd"),
-                    Reviewer(4, "fdsadfas"),
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(
-                        start = SpaceMedium,
-                        top = SpaceMedium,
-                        end = SpaceMedium
-                    )
             )
 
             // Space for save button
@@ -216,41 +172,6 @@ private fun NamePlaceholder() {
 }
 
 @Composable
-private fun Rating(
-    modifier: Modifier = Modifier,
-    value: String,
-    onValueChange: (String) -> Unit,
-) {
-    Column(modifier = modifier) {
-        TextField(
-            value = value,
-            onValueChange = onValueChange,
-            modifier = Modifier.fillMaxWidth(),
-            placeholder = { RatingPlaceholder() },
-            colors = TextFieldDefaults.textFieldColors(
-                disabledTextColor = Color.Transparent,
-                focusedIndicatorColor = Color.Transparent,
-                unfocusedIndicatorColor = Color.Transparent,
-                disabledIndicatorColor = Color.Transparent
-            ),
-            shape = CircleShape,
-            keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Number
-            )
-        )
-    }
-}
-
-@Composable
-private fun RatingPlaceholder() {
-    Column(
-        verticalArrangement = Arrangement.Center,
-    ) {
-        Text(text = stringResource(R.string.rating_placeholder), overflow = TextOverflow.Ellipsis)
-    }
-}
-
-@Composable
 private fun ProductBarcodeField(
     modifier: Modifier = Modifier,
     value: String,
@@ -295,9 +216,8 @@ private fun DescriptionField(
         TextField(
             value = value,
             onValueChange = onValueChange,
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth().height(200.dp),
             placeholder = { DescriptionPlaceholder() },
-//            label = { DescriptionPlaceholder() },
             colors = TextFieldDefaults.textFieldColors(
                 disabledTextColor = Color.Transparent,
                 focusedIndicatorColor = Color.Transparent,
@@ -306,7 +226,7 @@ private fun DescriptionField(
             ),
             shape = RoundedCornerShape(25.dp),
             maxLines = 10,
-            singleLine = false
+            singleLine = false,
         )
     }
 }
