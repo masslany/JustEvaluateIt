@@ -20,6 +20,10 @@ local.properties
 /.idea/assetWizardSettings.xml
 /.idea/jarRepositories.xml
 /.idea/deploymentTargetDropDown.xml
+/.idea/vcs.xml
+/.idea/.name
+/.idea/compiler.xml
+/.idea/gradle.xml
 *.iml
 
 # Update localization script needs node modules

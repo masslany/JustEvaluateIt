@@ -19,6 +19,14 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += ["room.schemaLocation":
+                                      "$projectDir/schemas".toString()]
+            }
+        }
+
     }
 
     buildTypes {
@@ -87,6 +95,14 @@ dependencies {
     // Lottie
     implementation 'com.airbnb.android:lottie:3.7.2'
 
+    // Accompanist
+    implementation "com.google.accompanist:accompanist-pager:0.15.0"
+    implementation "com.google.accompanist:accompanist-pager-indicators:0.15.0"
+
+    // Data store
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
+
+
     // ----- Tests -----
     // Tests
     testImplementation 'junit:junit:4.13.2'
@@ -101,7 +117,7 @@ dependencies {
 
     // Navigation
     androidTestImplementation "androidx.navigation:navigation-testing:$nav_version"
-    
+
     // Room
     testImplementation "androidx.room:room-testing:$room_version"
 
