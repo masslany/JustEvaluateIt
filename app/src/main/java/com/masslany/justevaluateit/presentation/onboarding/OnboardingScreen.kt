@@ -46,7 +46,7 @@ fun OnboardingScreen(
             viewModel.onGetStartedButtonClicked()
 
             navController.navigate(
-                R.id.action_onboardingFragment_to_dashboardFragment
+                R.id.to_app_nav_graph
             )
         },
         reviewers = reviewers,

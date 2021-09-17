@@ -10,6 +10,6 @@ class MainActivityViewModel @Inject constructor(
     shouldShowOnboardingUseCase: ShouldShowOnboardingUseCase
 ) : ViewModel() {
 
-    val shouldShowOnboarding by lazy { shouldShowOnboardingUseCase.execute() }
+    val shouldShowOnboarding = shouldShowOnboardingUseCase.execute()
 
 }
