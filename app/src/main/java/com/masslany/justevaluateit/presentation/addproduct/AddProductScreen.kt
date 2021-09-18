@@ -1,5 +1,6 @@
 package com.masslany.justevaluateit.presentation.addproduct
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -9,10 +10,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -23,15 +22,19 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.masslany.justevaluateit.R
 import com.masslany.justevaluateit.data.local.entity.Category
+import com.masslany.justevaluateit.presentation.addproduct.state.AddProductScreenState
+import com.masslany.justevaluateit.presentation.addproduct.state.AddProductState
 import com.masslany.justevaluateit.presentation.components.AppBar
 import com.masslany.justevaluateit.presentation.components.BarcodeButton
 import com.masslany.justevaluateit.presentation.dashboard.Tile
 import com.masslany.justevaluateit.presentation.ui.theme.BarcodeButtonHeight
 import com.masslany.justevaluateit.presentation.ui.theme.PurpleGradientBrush
 import com.masslany.justevaluateit.presentation.ui.theme.SpaceMedium
+import com.masslany.justevaluateit.presentation.ui.theme.SpaceVeryLarge
 
 
 @ExperimentalComposeUiApi
@@ -40,43 +43,43 @@ fun AddProductScreen(
     navController: NavController,
     viewModel: AddProductViewModel,
 ) {
-    val productNameFieldState by viewModel.productNameFieldState
-    val barcodeFieldState by viewModel.barcodeFieldState
-    val descriptionFieldState by viewModel.descriptionFieldState
-
     val categories by viewModel.categories.collectAsState(initial = emptyList())
+    val addProductState by viewModel.addProductState.observeAsState()
 
     AddProductScreen(
-        onNavigationIconClicked = { },
+        addProductState = addProductState,
+        onNavigationIconClicked = { navController.popBackStack() },
         categories = categories,
-        productNameFieldState = productNameFieldState,
-        onProductNameFieldChanged = viewModel::onProductNameFieldChange,
-        barcodeFieldState = barcodeFieldState,
-        onBarcodeFieldChanged = viewModel::onBarcodeFieldChange,
-        onSaveProductButtonClicked = viewModel::onSaveProductButtonClicked,
         onCategoryChanged = viewModel::onCategoryChanged,
-        descriptionFieldState = descriptionFieldState,
-        onDescriptionFieldChanged = viewModel::onDescriptionFieldChange,
+        onSaveProductButtonClicked = viewModel::onSaveProductButtonClicked,
     )
 }
 
 @ExperimentalComposeUiApi
 @Composable
 fun AddProductScreen(
+    addProductState: AddProductState?,
     onNavigationIconClicked: () -> Unit,
-    productNameFieldState: String,
-    onProductNameFieldChanged: (String) -> Unit,
-    barcodeFieldState: String,
-    onBarcodeFieldChanged: (String) -> Unit,
     categories: List<Category>,
     onCategoryChanged: (Category) -> Unit,
-    descriptionFieldState: String,
-    onDescriptionFieldChanged: (String) -> Unit,
-    onSaveProductButtonClicked: () -> Unit
+    onSaveProductButtonClicked: (String, String, String) -> Unit,
 ) {
     val columnScrollState = rememberScrollState()
-    Box(modifier = Modifier.fillMaxSize()) {
+    val screenState by remember { mutableStateOf(AddProductScreenState()) }
 
+    when (addProductState) {
+        AddProductState.EmptyProductName ->
+            screenState.showInvalidProductName(R.string.empty_product_name_error)
+        AddProductState.AlreadyTakenProductName ->
+            screenState.showInvalidProductName(R.string.product_name_exists_error)
+        AddProductState.InvalidBarcode -> screenState.showInvalidBarcode()
+//        AddProductState.Valid -> onValidProduct()
+        else -> {
+            /* No interaction */
+        }
+    }
+
+    Box(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -111,8 +114,10 @@ fun AddProductScreen(
                     ProductNameField(
                         modifier = Modifier
                             .padding(end = SpaceMedium),
-                        value = productNameFieldState,
-                        onValueChange = onProductNameFieldChanged
+                        value = screenState.productName,
+                        onValueChange = screenState::onProductNameFieldChange,
+                        isError = screenState.isInvalidName,
+                        errorMessage = screenState.productErrorMessage
                     )
                     Row(
                         verticalAlignment = Alignment.CenterVertically
@@ -121,12 +126,16 @@ fun AddProductScreen(
                             modifier = Modifier
                                 .padding(top = SpaceMedium, end = SpaceMedium)
                                 .weight(1f),
-                            value = barcodeFieldState,
-                            onValueChange = onBarcodeFieldChanged
+                            value = screenState.barcode,
+                            onValueChange = screenState::onBarcodeFieldChange,
+                            isError = screenState.isInvalidBarcode
                         )
+
+                        val barcodeTopPadding =
+                            if (screenState.isInvalidBarcode) SpaceVeryLarge else SpaceMedium
                         BarcodeButton(
                             modifier = Modifier
-                                .padding(top = SpaceMedium, end = SpaceMedium)
+                                .padding(top = barcodeTopPadding, end = SpaceMedium)
                                 .height(BarcodeButtonHeight)
                                 .aspectRatio(1f),
                         ) {
@@ -143,7 +152,6 @@ fun AddProductScreen(
                 ),
                 items = categories,
                 onCategorySelected = onCategoryChanged,
-//                onItemsLoadedSetDefaultCategory = onCategoryChanged,
             )
 
             DescriptionField(
@@ -152,8 +160,8 @@ fun AddProductScreen(
                     top = SpaceMedium,
                     end = SpaceMedium
                 ),
-                value = descriptionFieldState,
-                onValueChange = onDescriptionFieldChanged,
+                value = screenState.description,
+                onValueChange = screenState::onDescriptionFieldChange,
             )
 
             // Space for save button
@@ -166,7 +174,12 @@ fun AddProductScreen(
                 .height(45.dp)
                 .align(Alignment.BottomCenter)
         ) {
-            onSaveProductButtonClicked()
+            screenState.resetUiState()
+            onSaveProductButtonClicked(
+                screenState.productName,
+                screenState.barcode,
+                screenState.description
+            )
         }
     }
 
@@ -184,8 +197,17 @@ private fun ProductNameField(
     modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit,
+    isError: Boolean,
+    @StringRes errorMessage: Int
 ) {
     Column(modifier = modifier) {
+        if (isError) {
+            Text(
+                stringResource(errorMessage),
+                color = Color.Red,
+                fontSize = 12.sp
+            )
+        }
         TextField(
             value = value,
             onValueChange = onValueChange,
@@ -218,8 +240,16 @@ private fun ProductBarcodeField(
     modifier: Modifier = Modifier,
     value: String,
     onValueChange: (String) -> Unit,
+    isError: Boolean
 ) {
     Column(modifier = modifier) {
+        if (isError) {
+            Text(
+                stringResource(R.string.invalid_barcode_error),
+                color = Color.Red,
+                fontSize = 12.sp
+            )
+        }
         TextField(
             value = value,
             onValueChange = onValueChange,
@@ -410,5 +440,7 @@ fun SaveProductButton(
         Text(text = "Save")
     }
 }
+
+
 
 

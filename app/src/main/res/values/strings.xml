@@ -33,4 +33,7 @@
     <string name="add_category">Add category</string>
 
     <string name="get_started">Get started</string>
+    <string name="invalid_barcode_error">Invalid barcode</string>
+    <string name="empty_product_name_error">Name cannot be empty</string>
+    <string name="product_name_exists_error">Product name already taken</string>
 </resources>
