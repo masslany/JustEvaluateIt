@@ -9,7 +9,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
@@ -39,6 +42,7 @@ fun AddProductScreen(
 ) {
     val productNameFieldState by viewModel.productNameFieldState
     val barcodeFieldState by viewModel.barcodeFieldState
+    val descriptionFieldState by viewModel.descriptionFieldState
 
     val categories by viewModel.categories.collectAsState(initial = emptyList())
 
@@ -49,7 +53,10 @@ fun AddProductScreen(
         onProductNameFieldChanged = viewModel::onProductNameFieldChange,
         barcodeFieldState = barcodeFieldState,
         onBarcodeFieldChanged = viewModel::onBarcodeFieldChange,
-        onSaveProductButtonClicked = viewModel::onSaveProductButtonClicked
+        onSaveProductButtonClicked = viewModel::onSaveProductButtonClicked,
+        onCategoryChanged = viewModel::onCategoryChanged,
+        descriptionFieldState = descriptionFieldState,
+        onDescriptionFieldChanged = viewModel::onDescriptionFieldChange,
     )
 }
 
@@ -57,12 +64,15 @@ fun AddProductScreen(
 @Composable
 fun AddProductScreen(
     onNavigationIconClicked: () -> Unit,
-    categories: List<Category> = emptyList(),
     productNameFieldState: String,
     onProductNameFieldChanged: (String) -> Unit,
     barcodeFieldState: String,
     onBarcodeFieldChanged: (String) -> Unit,
-    onSaveProductButtonClicked: () -> Unit,
+    categories: List<Category>,
+    onCategoryChanged: (Category) -> Unit,
+    descriptionFieldState: String,
+    onDescriptionFieldChanged: (String) -> Unit,
+    onSaveProductButtonClicked: () -> Unit
 ) {
     val columnScrollState = rememberScrollState()
     Box(modifier = Modifier.fillMaxSize()) {
@@ -81,6 +91,7 @@ fun AddProductScreen(
                     onNavigationIconClicked()
                 }
             )
+
             Row(
                 modifier = Modifier.fillMaxWidth()
             ) {
@@ -123,7 +134,6 @@ fun AddProductScreen(
                         }
                     }
                 }
-
             }
 
             CategorySpinner(
@@ -131,22 +141,19 @@ fun AddProductScreen(
                     start = SpaceMedium,
                     end = SpaceMedium
                 ),
-                items = categories
-            ) {
+                items = categories,
+                onCategorySelected = onCategoryChanged,
+//                onItemsLoadedSetDefaultCategory = onCategoryChanged,
+            )
 
-            }
-
-            var description by remember {
-                mutableStateOf("")
-            }
             DescriptionField(
                 modifier = Modifier.padding(
                     start = SpaceMedium,
                     top = SpaceMedium,
                     end = SpaceMedium
                 ),
-                value = description,
-                onValueChange = { description = it }
+                value = descriptionFieldState,
+                onValueChange = onDescriptionFieldChanged,
             )
 
             // Space for save button
@@ -283,12 +290,19 @@ private fun DescriptionPlaceholder() {
 fun CategorySpinner(
     modifier: Modifier,
     items: List<Category>,
-    onTitleSelected: (Category) -> Unit
+    onCategorySelected: (Category) -> Unit,
 ) {
     if (items.isEmpty())
         return
 
     val text = rememberSaveable { mutableStateOf(items[0].name) }
+    /**
+     * Propagate default value further up on the first composition
+     * Might thinks about reworking that later on
+     **/
+    if (text.value == items[0].name) {
+        onCategorySelected(items[0])
+    }
     val isOpen = rememberSaveable { mutableStateOf(false) }
     val openCloseOfDropDownList: (Boolean) -> Unit = {
         isOpen.value = it
@@ -312,7 +326,7 @@ fun CategorySpinner(
             list = items,
             openCloseOfDropDownList,
             selectedItem = {
-                onTitleSelected(it)
+                onCategorySelected(it)
                 text.value = it.name
             }
         )
