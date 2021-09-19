@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.masslany.justevaluateit.R
 import com.masslany.justevaluateit.data.local.entity.Category
+import com.masslany.justevaluateit.data.local.entity.Product
 import com.masslany.justevaluateit.presentation.addproduct.state.AddProductScreenState
 import com.masslany.justevaluateit.presentation.addproduct.state.AddProductState
 import com.masslany.justevaluateit.presentation.components.AppBar
@@ -52,6 +53,11 @@ fun AddProductScreen(
         categories = categories,
         onCategoryChanged = viewModel::onCategoryChanged,
         onSaveProductButtonClicked = viewModel::onSaveProductButtonClicked,
+        onSuccessfulAddingProduct = {
+            // In the future navigate to the product page
+            // For now pop back stack
+            navController.popBackStack()
+        }
     )
 }
 
@@ -62,6 +68,7 @@ fun AddProductScreen(
     onNavigationIconClicked: () -> Unit,
     categories: List<Category>,
     onCategoryChanged: (Category) -> Unit,
+    onSuccessfulAddingProduct: (Product) -> Unit,
     onSaveProductButtonClicked: (String, String, String) -> Unit,
 ) {
     val columnScrollState = rememberScrollState()
@@ -73,7 +80,9 @@ fun AddProductScreen(
         AddProductState.AlreadyTakenProductName ->
             screenState.showInvalidProductName(R.string.product_name_exists_error)
         AddProductState.InvalidBarcode -> screenState.showInvalidBarcode()
-//        AddProductState.Valid -> onValidProduct()
+        is AddProductState.AddedProduct -> {
+            onSuccessfulAddingProduct(addProductState.product)
+        }
         else -> {
             /* No interaction */
         }
@@ -174,12 +183,12 @@ fun AddProductScreen(
                 .height(45.dp)
                 .align(Alignment.BottomCenter)
         ) {
-            screenState.resetUiState()
             onSaveProductButtonClicked(
                 screenState.productName,
                 screenState.barcode,
                 screenState.description
             )
+            screenState.resetUiState()
         }
     }
 

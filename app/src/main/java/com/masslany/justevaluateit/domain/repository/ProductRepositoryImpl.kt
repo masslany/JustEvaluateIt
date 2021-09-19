@@ -14,6 +14,10 @@ class ProductRepositoryImpl(
         return productDao.getAllProducts()
     }
 
+    override suspend fun getProductByName(productName: String): List<Product> {
+        return productDao.getProductByName(productName)
+    }
+
     override suspend fun addProduct(product: Product) {
         productDao.insertProduct(product)
     }

@@ -1,6 +1,5 @@
 package com.masslany.justevaluateit.di
 
-import com.masslany.justevaluateit.data.local.JEIDatabase
 import com.masslany.justevaluateit.domain.validation.AddProductValidation
 import dagger.Module
 import dagger.Provides
@@ -14,6 +13,5 @@ class UtilsModule {
 
     @Provides
     @Singleton
-    fun provideAddProductValidation(database: JEIDatabase): AddProductValidation =
-        AddProductValidation(database)
+    fun provideAddProductValidation(): AddProductValidation = AddProductValidation()
 }

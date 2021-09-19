@@ -48,12 +48,14 @@ class AddProductViewModel @Inject constructor(
                     _addProductState.value = AddProductState.InvalidBarcode
                 AddProductValidationResult.AlreadyTakenProductName ->
                     _addProductState.value = AddProductState.AlreadyTakenProductName
-                AddProductValidationResult.Valid ->
+                AddProductValidationResult.Valid -> {
                     proceedWithAddingProduct(
                         productName = productName,
                         barcode = barcode,
                         description = description
                     )
+                }
+
             }
         }
     }
@@ -82,7 +84,8 @@ class AddProductViewModel @Inject constructor(
         )
 
         viewModelScope.launch {
-            addProductUseCase.execute(product)
+            val state = addProductUseCase.execute(product)
+            _addProductState.value = state
         }
     }
 }

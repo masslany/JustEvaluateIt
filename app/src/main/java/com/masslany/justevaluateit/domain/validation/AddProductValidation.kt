@@ -1,27 +1,27 @@
 package com.masslany.justevaluateit.domain.validation
 
-import com.masslany.justevaluateit.data.local.JEIDatabase
 import java.util.regex.Pattern
 
-class AddProductValidation(database: JEIDatabase) {
+class AddProductValidation {
 
     private companion object {
-        private const val BARCODE_PATTERN = """\d{8}|\d{13}"""
+        private const val BARCODE_EAN8_PATTERN = """\d{8}"""
+        private const val BARCODE_EAN13_PATTERN = """\d{13}"""
     }
 
-    private val barcodePattern = Pattern.compile(BARCODE_PATTERN)
-    private val productDao = database.productDao
+    private val barcodeEan8Pattern = Pattern.compile(BARCODE_EAN8_PATTERN)
+    private val barcodeEan13Pattern = Pattern.compile(BARCODE_EAN13_PATTERN)
 
-    suspend fun validate(
+    fun validate(
         productName: String,
         barcode: String
     ): AddProductValidationResult {
         return if (productName.isBlank() || productName.isEmpty()) {
             AddProductValidationResult.EmptyProductName
-        } else if (!barcodePattern.matcher(barcode).matches()) {
+        } else if ((!barcodeEan8Pattern.matcher(barcode).matches() &&
+                    !barcodeEan13Pattern.matcher(barcode).matches()) && barcode.isNotEmpty()
+        ) {
             AddProductValidationResult.InvalidBarcode
-        } else if (productDao.getProductByName(productName).isNotEmpty()) {
-            AddProductValidationResult.AlreadyTakenProductName
         } else {
             AddProductValidationResult.Valid
         }
