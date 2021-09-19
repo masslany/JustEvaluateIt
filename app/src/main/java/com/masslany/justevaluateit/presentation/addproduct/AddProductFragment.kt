@@ -1,4 +1,4 @@
-package com.masslany.justevaluateit.presentation.dashboard
+package com.masslany.justevaluateit.presentation.addproduct
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,15 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.masslany.justevaluateit.R
 import com.masslany.justevaluateit.presentation.ui.theme.JustEvaluateItTheme
 import dagger.hilt.android.AndroidEntryPoint
 
+@ExperimentalComposeUiApi
 @AndroidEntryPoint
-class DashboardFragment : Fragment() {
+class AddProductFragment : Fragment() {
+
+    private val viewModel: AddProductViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,12 +30,10 @@ class DashboardFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 JustEvaluateItTheme {
-                    // A surface container using the 'background' color from the theme
                     Surface(color = MaterialTheme.colors.background) {
-                        DashboardScreen(
-                            navigateToAddProduct = {
-                                navController.navigate(R.id.action_dashboardFragment_to_addProductFragment)
-                            }
+                        AddProductScreen(
+                            viewModel = viewModel,
+                            navController = navController
                         )
                     }
                 }

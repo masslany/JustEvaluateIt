@@ -7,5 +7,17 @@
     <fragment
         android:id="@+id/dashboardFragment"
         android:name="com.masslany.justevaluateit.presentation.dashboard.DashboardFragment"
-        android:label="DashboardFragment" />
+        android:label="DashboardFragment" >
+        <action
+            android:id="@+id/action_dashboardFragment_to_addProductFragment"
+            app:destination="@id/addProductFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/addProductFragment"
+        android:name="com.masslany.justevaluateit.presentation.addproduct.AddProductFragment"
+        android:label="AddProductFragment" />
 </navigation>

@@ -16,6 +16,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.masslany.justevaluateit.R
+import com.masslany.justevaluateit.presentation.ui.theme.PurpleGradientBrush
 import com.masslany.justevaluateit.presentation.ui.theme.RoundedCornerMedium
 
 @Composable
@@ -23,18 +24,12 @@ fun BarcodeButton(
     modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
-    val verticalGradientBrush = Brush.verticalGradient(
-        colors = listOf(
-            Color(0xffCD2EFF),
-            Color(0xffA42FF6)
-        )
-    )
     val shape = RoundedCornerShape(RoundedCornerMedium)
 
     Box(
         modifier = modifier
             .background(
-                brush = verticalGradientBrush,
+                brush = PurpleGradientBrush,
                 shape = shape
             )
             .clip(shape)

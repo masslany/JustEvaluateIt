@@ -1,5 +1,6 @@
 package com.masslany.justevaluateit.presentation.ui.theme
 
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 
 val Purple200 = Color(0xFFBB86FC)
@@ -11,3 +12,10 @@ val ButtonColorStart = Color(0xFF2D3855)
 val ButtonColorMiddle = Color(0xFF343E57)
 val SurfaceDarkColor = Color(0xFF384055)
 val SurfaceLightColor = Color(0xFFe0e0e0)
+
+val PurpleGradientBrush = Brush.verticalGradient(
+    colors = listOf(
+        Color(0xffCD2EFF),
+        Color(0xffA42FF6)
+    )
+)

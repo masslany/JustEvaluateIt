@@ -35,7 +35,9 @@ fun Search(
                 disabledIndicatorColor = Color.Transparent
             ),
             shape = CircleShape,
-            trailingIcon = { TrailingSearchIcon() }
+            trailingIcon = { TrailingSearchIcon() },
+            singleLine = true,
+            maxLines = 1
         )
     }
 }
