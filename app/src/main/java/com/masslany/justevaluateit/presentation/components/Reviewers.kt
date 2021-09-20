@@ -25,9 +25,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.masslany.justevaluateit.R
+import com.masslany.justevaluateit.data.local.entity.Reviewer
 import com.masslany.justevaluateit.presentation.ui.theme.PurpleGradientBrush
-
-data class Reviewer(val id: Int, val name: String)
 
 @Composable
 fun Reviewers(
@@ -36,7 +35,7 @@ fun Reviewers(
 ) {
     val scrollState = rememberScrollState()
     var selectedItem by rememberSaveable {
-        mutableStateOf(items[0].id)
+        mutableStateOf(items[0].reviewerId)
     }
     Row(
         modifier = modifier
@@ -57,7 +56,7 @@ fun ReviewerItem(reviewer: Reviewer, isSelected: Boolean, onItemSelected: (Int) 
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .clickable {
-                onItemSelected(reviewer.id)
+                onItemSelected(reviewer.reviewerId)
             }
             .widthIn(0.dp, 100.dp)
     ) {

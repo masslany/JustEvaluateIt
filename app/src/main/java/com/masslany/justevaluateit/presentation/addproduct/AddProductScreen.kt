@@ -53,6 +53,7 @@ import com.masslany.justevaluateit.presentation.components.AppBar
 import com.masslany.justevaluateit.presentation.components.BarcodeButton
 import com.masslany.justevaluateit.presentation.dashboard.Tile
 import com.masslany.justevaluateit.presentation.ui.theme.BarcodeButtonHeight
+import com.masslany.justevaluateit.presentation.ui.theme.FractionFourTenth
 import com.masslany.justevaluateit.presentation.ui.theme.PurpleGradientBrush
 import com.masslany.justevaluateit.presentation.ui.theme.SpaceMedium
 import com.masslany.justevaluateit.presentation.ui.theme.SpaceVeryLarge
@@ -82,6 +83,7 @@ fun AddProductScreen(
 
 @ExperimentalComposeUiApi
 @Composable
+@Suppress("LongParameterList", "LongMethod")
 fun AddProductScreen(
     addProductState: AddProductState?,
     onNavigationIconClicked: () -> Unit,
@@ -129,7 +131,7 @@ fun AddProductScreen(
                 Tile(
                     modifier = Modifier
                         .padding(SpaceMedium)
-                        .fillMaxWidth(0.4f),
+                        .fillMaxWidth(FractionFourTenth),
                     icon = addPhotoIcon(),
                     contentDescription = stringResource(R.string.content_description_add_product_tile),
                 ) {

@@ -15,3 +15,10 @@ val RoundedCornerMedium = 16.dp
 val RoundedCornerLarge = 32.dp
 
 val BarcodeButtonHeight = 48.dp
+
+@Suppress("TopLevelPropertyNaming")
+const val FractionHalf = 0.5f
+
+@Suppress("TopLevelPropertyNaming")
+
+const val FractionFourTenth = 0.4f

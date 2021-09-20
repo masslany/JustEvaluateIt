@@ -1,3 +1,5 @@
+@file:Suppress("MagicNumber", "UnusedPrivateMember", "ForbiddenComment")
+
 package com.masslany.justevaluateit.presentation.components
 
 import androidx.compose.foundation.background
