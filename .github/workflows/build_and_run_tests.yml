@@ -1,4 +1,4 @@
-name: Build and run tests
+name: Build, run tests and linter
 on:
   push:
     branches: [ develop ]
