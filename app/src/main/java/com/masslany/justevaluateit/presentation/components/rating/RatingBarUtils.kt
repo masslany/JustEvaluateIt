@@ -10,19 +10,20 @@ object RatingBarUtils {
      *  float value that should be selected
      * */
     fun calculateRatingItems(
-        draggedWidth: Float, width: Float,
-        numItems: Int, padding: Int
+        draggedWidth: Float,
+        width: Float,
+        numItems: Int,
+        padding: Int
     ): Float {
         var overAllComposeWidth = width
         val spacerWidth = numItems * (2 * padding)
 
-        //removing padding's width
+        // removing padding's width
         overAllComposeWidth -= spacerWidth
         return if (draggedWidth != 0f)
             ((draggedWidth / overAllComposeWidth) * numItems)
         else 0f
     }
-
 
     /**
      *  @return rating stars float value depends on [StepSize]
@@ -43,7 +44,7 @@ object RatingBarUtils {
         else {
             var value = this.toInt().toFloat()
             if (this < value.plus(0.5)) {
-                if(this==0f)
+                if (this == 0f)
                     return 0f
                 value = value.plus(0.5).toFloat()
                 value

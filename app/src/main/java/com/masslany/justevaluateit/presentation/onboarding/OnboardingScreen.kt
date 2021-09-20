@@ -2,7 +2,13 @@ package com.masslany.justevaluateit.presentation.onboarding
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -26,7 +32,6 @@ import com.masslany.justevaluateit.presentation.ui.theme.SpaceMedium
 import com.masslany.justevaluateit.presentation.ui.theme.SurfaceDarkColor
 import com.masslany.justevaluateit.presentation.ui.theme.SurfaceLightColor
 import kotlinx.coroutines.launch
-
 
 @ExperimentalAnimationApi
 @ExperimentalPagerApi
@@ -115,7 +120,7 @@ fun OnboardingScreen(
         }
 
         val shouldShowNextPageButton = pagerState.currentPage == 0 ||
-                (pagerState.currentPage == 1 && reviewers.isNotEmpty())
+            (pagerState.currentPage == 1 && reviewers.isNotEmpty())
 
         val shouldShowGetStartedButton = pagerState.currentPage == 2 && categories.isNotEmpty()
 
@@ -153,7 +158,6 @@ fun OnboardingScreen(
             inactiveColor = SurfaceDarkColor,
             activeColor = SurfaceLightColor
         )
-
 
         Spacer(modifier = Modifier.height(12.dp))
     }

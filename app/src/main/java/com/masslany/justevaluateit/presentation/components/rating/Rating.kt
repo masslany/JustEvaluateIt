@@ -2,8 +2,14 @@ package com.masslany.justevaluateit.presentation.addproduct
 
 import android.util.Log
 import android.view.MotionEvent
-import androidx.compose.foundation.layout.*
-import androidx.compose.runtime.*
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
@@ -31,10 +37,9 @@ sealed class RatingBarStyle {
     object HighLighted : RatingBarStyle()
 }
 
-//For ui testing
+// For ui testing
 val StarRatingKey = SemanticsPropertyKey<Float>("StarRating")
 var SemanticsPropertyReceiver.starRating by StarRatingKey
-
 
 /**
  * @param value is current selected rating count
@@ -68,42 +73,44 @@ fun RatingBar(
     var rowSize by remember { mutableStateOf(Size.Zero) }
     var changedValue by remember { mutableStateOf(0f) }
 
-    Row(modifier = modifier
-        .onSizeChanged { rowSize = it.toSize() }
-        .pointerInteropFilter {
-            if (isIndicator || hideInactiveStars)
-                return@pointerInteropFilter false
-            when (it.action) {
-                MotionEvent.ACTION_DOWN -> {
-                    //handling when single click happens
-                    val calculatedStars =
-                        RatingBarUtils.calculateRatingItems(
-                            it.x, rowSize.width,
-                            numStars, padding.value.toInt()
-                        )
-                    val newValue = calculatedStars.stepSized(stepSize)
-                    onValueChange(newValue)
-                    onRatingChanged(changedValue)
+    Row(
+        modifier = modifier
+            .onSizeChanged { rowSize = it.toSize() }
+            .pointerInteropFilter {
+                if (isIndicator || hideInactiveStars)
+                    return@pointerInteropFilter false
+                when (it.action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        // handling when single click happens
+                        val calculatedStars =
+                            RatingBarUtils.calculateRatingItems(
+                                it.x, rowSize.width,
+                                numStars, padding.value.toInt()
+                            )
+                        val newValue = calculatedStars.stepSized(stepSize)
+                        onValueChange(newValue)
+                        onRatingChanged(changedValue)
+                    }
+                    MotionEvent.ACTION_MOVE -> {
+                        // handling while dragging event
+                        val x1 = it.x.coerceIn(0f, rowSize.width)
+                        val calculatedStars =
+                            RatingBarUtils.calculateRatingItems(
+                                x1, rowSize.width,
+                                numStars, padding.value.toInt()
+                            )
+                        val newValue = calculatedStars.stepSized(stepSize)
+                        onValueChange(newValue)
+                        changedValue = newValue
+                    }
+                    MotionEvent.ACTION_UP -> {
+                        // when the click or drag is released
+                        onRatingChanged(changedValue)
+                    }
                 }
-                MotionEvent.ACTION_MOVE -> {
-                    //handling while dragging event
-                    val x1 = it.x.coerceIn(0f, rowSize.width)
-                    val calculatedStars =
-                        RatingBarUtils.calculateRatingItems(
-                            x1, rowSize.width,
-                            numStars, padding.value.toInt()
-                        )
-                    val newValue = calculatedStars.stepSized(stepSize)
-                    onValueChange(newValue)
-                    changedValue = newValue
-                }
-                MotionEvent.ACTION_UP -> {
-                    //when the click or drag is released
-                    onRatingChanged(changedValue)
-                }
+                true
             }
-            true
-        }) {
+    ) {
         ComposeStars(
             value, numStars, size, padding, activeColor,
             inactiveColor, hideInactiveStars, ratingBarStyle
@@ -155,7 +162,6 @@ fun ComposeStars(
                     .testTag("RatingStar")
             )
         }
-
     }
 }
 

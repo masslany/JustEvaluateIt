@@ -40,4 +40,3 @@ class MainActivity : AppCompatActivity() {
         navHostFragment.navController.graph = navGraph
     }
 }
-

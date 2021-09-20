@@ -1,7 +1,17 @@
 package com.masslany.justevaluateit.presentation.components
 
-import androidx.compose.foundation.*
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -69,7 +79,6 @@ fun ReviewerItem(reviewer: Reviewer, isSelected: Boolean, onItemSelected: (Int) 
                         }
                     )
             )
-
         }
         Text(
             text = reviewer.name,
@@ -79,5 +88,4 @@ fun ReviewerItem(reviewer: Reviewer, isSelected: Boolean, onItemSelected: (Int) 
             maxLines = 1
         )
     }
-
 }

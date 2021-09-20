@@ -1,8 +1,6 @@
 package com.masslany.justevaluateit.data.local
 
-import android.content.Context
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.masslany.justevaluateit.data.local.dao.CategoryDao
 import com.masslany.justevaluateit.data.local.dao.ProductDao
@@ -29,5 +27,4 @@ abstract class JEIDatabase : RoomDatabase() {
     abstract val productDao: ProductDao
     abstract val reviewDao: ReviewDao
     abstract val reviewerDao: ReviewerDao
-
 }

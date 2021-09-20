@@ -14,7 +14,6 @@ import androidx.compose.ui.unit.dp
 import com.masslany.justevaluateit.presentation.ui.theme.PurpleGradientBrush
 import com.masslany.justevaluateit.presentation.ui.theme.SurfaceDarkColor
 
-
 @Composable
 fun RatingItem(
     @FloatRange(from = 0.0, to = 1.0) fraction: Float,

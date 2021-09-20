@@ -55,7 +55,6 @@ class AddProductViewModel @Inject constructor(
                         description = description
                     )
                 }
-
             }
         }
     }
