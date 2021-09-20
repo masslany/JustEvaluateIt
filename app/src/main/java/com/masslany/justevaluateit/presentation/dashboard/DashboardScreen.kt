@@ -27,9 +27,11 @@ import com.masslany.justevaluateit.presentation.components.BarcodeButton
 import com.masslany.justevaluateit.presentation.components.RecentlyAdded
 import com.masslany.justevaluateit.presentation.components.Search
 import com.masslany.justevaluateit.presentation.ui.theme.BarcodeButtonHeight
+import com.masslany.justevaluateit.presentation.ui.theme.FractionHalf
 import com.masslany.justevaluateit.presentation.ui.theme.SpaceMedium
 
 @Composable
+@Suppress("LongMethod")
 fun DashboardScreen(
     navigateToAddProduct: () -> Unit
 ) {
@@ -82,7 +84,7 @@ fun DashboardScreen(
             Tile(
                 modifier = Modifier
                     .padding(end = SpaceMedium)
-                    .fillMaxWidth(0.5f),
+                    .fillMaxWidth(FractionHalf),
                 text = stringResource(R.string.add_product),
                 icon = addProductIcon(),
                 contentDescription = stringResource(R.string.content_description_add_product)

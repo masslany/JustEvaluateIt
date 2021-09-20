@@ -99,7 +99,7 @@ fun PageCategory(
                     onClick = {
                         isAddReviewerFieldVisible = !isAddReviewerFieldVisible
                         scope.launch {
-                            delay(200)
+                            delay(SLIDE_TO_KEYBOARD_DELAY)
                             scrollState.scrollTo(scrollState.maxValue)
                         }
                     }

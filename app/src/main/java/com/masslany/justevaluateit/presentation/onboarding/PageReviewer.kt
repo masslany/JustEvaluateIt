@@ -37,6 +37,8 @@ import com.masslany.justevaluateit.presentation.ui.theme.SpaceVeryLarge
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+const val SLIDE_TO_KEYBOARD_DELAY = 200L
+
 @ExperimentalAnimationApi
 @Composable
 fun PageReviewer(
@@ -102,7 +104,7 @@ fun PageReviewer(
                     onClick = {
                         isAddReviewerFieldVisible = !isAddReviewerFieldVisible
                         scope.launch {
-                            delay(200)
+                            delay(SLIDE_TO_KEYBOARD_DELAY)
                             scrollState.scrollTo(scrollState.maxValue)
                         }
                     }

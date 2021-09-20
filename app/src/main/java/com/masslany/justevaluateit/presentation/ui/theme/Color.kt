@@ -1,3 +1,5 @@
+@file:Suppress("MagicNumber")
+
 package com.masslany.justevaluateit.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Brush
@@ -12,6 +14,8 @@ val ButtonColorStart = Color(0xFF2D3855)
 val ButtonColorMiddle = Color(0xFF343E57)
 val SurfaceDarkColor = Color(0xFF384055)
 val SurfaceLightColor = Color(0xFFe0e0e0)
+
+val BackgroundDark = Color(0xFF1C253F)
 
 val PurpleGradientBrush = Brush.verticalGradient(
     colors = listOf(

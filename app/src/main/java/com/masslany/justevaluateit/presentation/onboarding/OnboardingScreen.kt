@@ -68,6 +68,7 @@ fun OnboardingScreen(
 @ExperimentalAnimationApi
 @ExperimentalPagerApi
 @Composable
+@Suppress("LongParameterList")
 fun OnboardingScreen(
     onGetStartedClick: () -> Unit,
     reviewers: List<Reviewer>,
