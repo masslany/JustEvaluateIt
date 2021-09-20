@@ -9,8 +9,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.unit.dp
-import com.masslany.justevaluateit.presentation.ui.theme.*
+import com.masslany.justevaluateit.presentation.ui.theme.AppBarBackIconSize
+import com.masslany.justevaluateit.presentation.ui.theme.AppBarTopPadding
+import com.masslany.justevaluateit.presentation.ui.theme.SpaceMedium
+import com.masslany.justevaluateit.presentation.ui.theme.SpaceSmall
 
 @Composable
 fun AppBar(

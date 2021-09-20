@@ -47,5 +47,4 @@ class AddProductScreenState {
         isInvalidBarcode = false
         productErrorMessage = 0
     }
-
 }

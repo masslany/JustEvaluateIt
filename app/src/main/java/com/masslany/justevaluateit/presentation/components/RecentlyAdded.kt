@@ -14,7 +14,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.masslany.justevaluateit.presentation.ui.theme.SurfaceDarkColor
 import com.masslany.justevaluateit.presentation.ui.theme.SpaceMedium
 import com.masslany.justevaluateit.presentation.ui.theme.SpaceSmall
 
@@ -40,7 +39,8 @@ fun RecentlyAdded(
         LazyColumn(modifier = Modifier.fillMaxWidth()) {
             items(listOf(1, 2, 3, 4, 5, 6, 7)) { item ->
                 Text(
-                    "Hello $item", modifier = Modifier
+                    "Hello $item",
+                    modifier = Modifier
                         .fillMaxWidth()
                         .height(60.dp)
                         .padding(SpaceSmall)

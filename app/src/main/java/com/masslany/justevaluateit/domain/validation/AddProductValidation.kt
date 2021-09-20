@@ -18,8 +18,10 @@ class AddProductValidation {
     ): AddProductValidationResult {
         return if (productName.isBlank() || productName.isEmpty()) {
             AddProductValidationResult.EmptyProductName
-        } else if ((!barcodeEan8Pattern.matcher(barcode).matches() &&
-                    !barcodeEan13Pattern.matcher(barcode).matches()) && barcode.isNotEmpty()
+        } else if ((
+            !barcodeEan8Pattern.matcher(barcode).matches() &&
+                !barcodeEan13Pattern.matcher(barcode).matches()
+            ) && barcode.isNotEmpty()
         ) {
             AddProductValidationResult.InvalidBarcode
         } else {
