@@ -121,7 +121,7 @@ fun OnboardingScreen(
         }
 
         val shouldShowNextPageButton = pagerState.currentPage == 0 ||
-                (pagerState.currentPage == 1 && reviewers.isNotEmpty())
+            (pagerState.currentPage == 1 && reviewers.isNotEmpty())
 
         val shouldShowGetStartedButton = pagerState.currentPage == 2 && categories.isNotEmpty()
 
