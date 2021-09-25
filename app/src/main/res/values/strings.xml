@@ -36,4 +36,5 @@
     <string name="invalid_barcode_error">Invalid barcode</string>
     <string name="empty_product_name_error">Name cannot be empty</string>
     <string name="product_name_exists_error">Product name already taken</string>
+    <string name="camera_permission_not_granted">Camera permission not granted</string>
 </resources>
