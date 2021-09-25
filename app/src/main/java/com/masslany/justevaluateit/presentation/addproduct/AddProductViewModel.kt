@@ -2,6 +2,7 @@ package com.masslany.justevaluateit.presentation.addproduct
 
 import android.util.Log
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -15,6 +16,8 @@ import com.masslany.justevaluateit.domain.validation.AddProductValidation
 import com.masslany.justevaluateit.domain.validation.AddProductValidationResult
 import com.masslany.justevaluateit.presentation.addproduct.state.AddProductState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -25,11 +28,17 @@ class AddProductViewModel @Inject constructor(
     private val addProductUseCase: AddProductUseCase,
 ) : ViewModel() {
 
-    val categories = getAllCategoriesUseCase.execute()
     private val selectedCategory: MutableState<Category?> = mutableStateOf(null)
+    val categories = getAllCategoriesUseCase.execute()
+
+    private val _barcode: MutableState<String> = mutableStateOf("")
+    val barcode: State<String> = _barcode
 
     private val _addProductState = MutableLiveData<AddProductState>()
     val addProductState: LiveData<AddProductState> = _addProductState
+
+    private val _addProductChannel = Channel<AddProductEvent>()
+    val addProductChannel = _addProductChannel.receiveAsFlow()
 
     fun onCategoryChanged(category: Category) {
         selectedCategory.value = category
@@ -85,6 +94,16 @@ class AddProductViewModel @Inject constructor(
         viewModelScope.launch {
             val state = addProductUseCase.execute(product)
             _addProductState.value = state
+        }
+    }
+
+    fun onBarcodeChanged(barcode: String) {
+        _barcode.value = barcode
+    }
+
+    fun onBarcodeButtonClicked() {
+        viewModelScope.launch {
+            _addProductChannel.send(AddProductEvent.LaunchBarcodeScanner)
         }
     }
 }

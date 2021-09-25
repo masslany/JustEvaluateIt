@@ -66,9 +66,12 @@ fun AddProductScreen(
 ) {
     val categories by viewModel.categories.collectAsState(initial = emptyList())
     val addProductState by viewModel.addProductState.observeAsState()
+    val barcode by viewModel.barcode
 
     AddProductScreen(
         addProductState = addProductState,
+        barcode = barcode,
+        onBarcodeChanged = viewModel::onBarcodeChanged,
         onNavigationIconClicked = { navController.popBackStack() },
         categories = categories,
         onCategoryChanged = viewModel::onCategoryChanged,
@@ -77,7 +80,8 @@ fun AddProductScreen(
             // In the future navigate to the product page
             // For now pop back stack
             navController.popBackStack()
-        }
+        },
+        onBarcodeButtonClicked = viewModel::onBarcodeButtonClicked
     )
 }
 
@@ -86,11 +90,14 @@ fun AddProductScreen(
 @Suppress("LongParameterList", "LongMethod")
 fun AddProductScreen(
     addProductState: AddProductState?,
+    barcode: String,
+    onBarcodeChanged: (String) -> Unit,
     onNavigationIconClicked: () -> Unit,
     categories: List<Category>,
     onCategoryChanged: (Category) -> Unit,
     onSuccessfulAddingProduct: (Product) -> Unit,
     onSaveProductButtonClicked: (String, String, String) -> Unit,
+    onBarcodeButtonClicked: () -> Unit,
 ) {
     val columnScrollState = rememberScrollState()
     val screenState by remember { mutableStateOf(AddProductScreenState()) }
@@ -155,8 +162,13 @@ fun AddProductScreen(
                             modifier = Modifier
                                 .padding(top = SpaceMedium, end = SpaceMedium)
                                 .weight(1f),
-                            value = screenState.barcode,
-                            onValueChange = screenState::onBarcodeFieldChange,
+                            value = barcode,
+                            onValueChange = {
+                                // That goes for error handling
+                                screenState.onBarcodeFieldChange(it)
+                                // And that one for storing the value in ViewModel
+                                onBarcodeChanged(it)
+                            },
                             isError = screenState.isInvalidBarcode
                         )
 
@@ -168,6 +180,7 @@ fun AddProductScreen(
                                 .height(BarcodeButtonHeight)
                                 .aspectRatio(1f),
                         ) {
+                            onBarcodeButtonClicked()
                         }
                     }
                 }
