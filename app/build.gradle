@@ -102,7 +102,8 @@ dependencies {
     // Data store
     implementation "androidx.datastore:datastore-preferences:1.0.0"
 
-    //
+    // Kaiteki Barcode
+    implementation "com.kroegerama:barcode-kaiteki:1.2.0"
 
 
     // ----- Tests -----
