@@ -14,11 +14,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
@@ -28,17 +28,21 @@ import com.masslany.justevaluateit.data.local.entity.Category
 import com.masslany.justevaluateit.data.local.entity.Reviewer
 import com.masslany.justevaluateit.presentation.components.CircleButton
 import com.masslany.justevaluateit.presentation.components.RoundedButton
+import com.masslany.justevaluateit.presentation.dashboard.DashboardKey
 import com.masslany.justevaluateit.presentation.ui.theme.SpaceMedium
 import com.masslany.justevaluateit.presentation.ui.theme.SurfaceDarkColor
 import com.masslany.justevaluateit.presentation.ui.theme.SurfaceLightColor
+import com.zhuinden.simplestack.Backstack
+import com.zhuinden.simplestack.StateChange
 import kotlinx.coroutines.launch
 
+@ExperimentalComposeUiApi
 @ExperimentalAnimationApi
 @ExperimentalPagerApi
 @Composable
 fun OnboardingScreen(
     viewModel: OnboardingViewModel,
-    navController: NavController
+    backstack: Backstack,
 ) {
     val reviewers by viewModel.reviewers.collectAsState(initial = emptyList())
     val addReviewerFieldState = viewModel.addReviewerFieldState.value
@@ -48,11 +52,8 @@ fun OnboardingScreen(
 
     OnboardingScreen(
         onGetStartedClick = {
+            backstack.replaceTop(DashboardKey(), StateChange.REPLACE)
             viewModel.onGetStartedButtonClicked()
-
-            navController.navigate(
-                R.id.to_app_nav_graph
-            )
         },
         reviewers = reviewers,
         addReviewerFieldValue = addReviewerFieldState,
@@ -139,7 +140,7 @@ fun OnboardingScreen(
             )
         }
 
-        this@Column.AnimatedVisibility(
+        AnimatedVisibility(
             visible = shouldShowGetStartedButton
         ) {
             RoundedButton(

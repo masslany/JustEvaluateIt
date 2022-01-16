@@ -6,13 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.masslany.justevaluateit.R
 import com.masslany.justevaluateit.presentation.ui.theme.JustEvaluateItTheme
+import com.zhuinden.simplestackextensions.fragmentsktx.backstack
 import dagger.hilt.android.AndroidEntryPoint
 
+@ExperimentalComposeUiApi
 @AndroidEntryPoint
 class DashboardFragment : Fragment() {
 
@@ -21,7 +22,6 @@ class DashboardFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val navController = findNavController()
 
         return ComposeView(requireContext()).apply {
             setContent {
@@ -29,9 +29,7 @@ class DashboardFragment : Fragment() {
                     // A surface container using the 'background' color from the theme
                     Surface(color = MaterialTheme.colors.background) {
                         DashboardScreen(
-                            navigateToAddProduct = {
-                                navController.navigate(R.id.action_dashboardFragment_to_addProductFragment)
-                            }
+                            backstack = backstack
                         )
                     }
                 }

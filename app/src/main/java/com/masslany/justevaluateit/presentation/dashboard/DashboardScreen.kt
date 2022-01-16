@@ -18,10 +18,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.masslany.justevaluateit.R
+import com.masslany.justevaluateit.presentation.addproduct.AddProductKey
 import com.masslany.justevaluateit.presentation.components.AppBar
 import com.masslany.justevaluateit.presentation.components.BarcodeButton
 import com.masslany.justevaluateit.presentation.components.RecentlyAdded
@@ -29,6 +31,18 @@ import com.masslany.justevaluateit.presentation.components.Search
 import com.masslany.justevaluateit.presentation.ui.theme.BarcodeButtonHeight
 import com.masslany.justevaluateit.presentation.ui.theme.FractionHalf
 import com.masslany.justevaluateit.presentation.ui.theme.SpaceMedium
+import com.zhuinden.simplestack.Backstack
+
+
+@ExperimentalComposeUiApi
+@Composable
+fun DashboardScreen(
+    backstack: Backstack,
+) {
+    DashboardScreen(
+        navigateToAddProduct = { backstack.goTo(AddProductKey()) }
+    )
+}
 
 @Composable
 @Suppress("LongMethod")
