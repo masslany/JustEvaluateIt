@@ -33,10 +33,7 @@ class OnboardingPreferenceImpl @Inject constructor(
             } else {
                 throw exception
             }
-        }.map {
-            Log.d("TAG", "isFirstLaunch: value is: ${it[key]}")
-            it[key] ?: true
-        }
+        }.map { it[key] ?: true }
     }
 
     override suspend fun setFirstLaunch(firstLaunch: Boolean) {
