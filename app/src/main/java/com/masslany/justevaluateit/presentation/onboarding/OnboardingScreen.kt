@@ -33,6 +33,7 @@ import com.masslany.justevaluateit.presentation.ui.theme.SpaceMedium
 import com.masslany.justevaluateit.presentation.ui.theme.SurfaceDarkColor
 import com.masslany.justevaluateit.presentation.ui.theme.SurfaceLightColor
 import com.zhuinden.simplestack.Backstack
+import com.zhuinden.simplestack.History
 import com.zhuinden.simplestack.StateChange
 import kotlinx.coroutines.launch
 
@@ -52,7 +53,7 @@ fun OnboardingScreen(
 
     OnboardingScreen(
         onGetStartedClick = {
-            backstack.replaceTop(DashboardKey(), StateChange.REPLACE)
+            backstack.setHistory(History.of(DashboardKey()), StateChange.REPLACE)
             viewModel.onGetStartedButtonClicked()
         },
         reviewers = reviewers,
