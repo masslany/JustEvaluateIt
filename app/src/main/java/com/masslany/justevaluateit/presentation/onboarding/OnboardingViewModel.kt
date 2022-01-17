@@ -3,8 +3,6 @@ package com.masslany.justevaluateit.presentation.onboarding
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.masslany.justevaluateit.data.local.entity.Category
 import com.masslany.justevaluateit.data.local.entity.Reviewer
 import com.masslany.justevaluateit.domain.usecase.category.AddCategoryUseCase
@@ -12,9 +10,6 @@ import com.masslany.justevaluateit.domain.usecase.category.GetAllCategoriesUseCa
 import com.masslany.justevaluateit.domain.usecase.onboarding.UpdateShowOnboardingUseCase
 import com.masslany.justevaluateit.domain.usecase.reviewer.AddReviewerUseCase
 import com.masslany.justevaluateit.domain.usecase.reviewer.GetAllReviewersUseCase
-import com.zhuinden.simplestack.Bundleable
-import com.zhuinden.statebundle.StateBundle
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch

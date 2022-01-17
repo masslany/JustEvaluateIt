@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity(), SimpleStateChanger.NavigationHandler {
             .install(
                 this,
                 findViewById(R.id.nav_host_fragment_container),
-                History.of( if(viewModel.shouldShowOnboarding) OnboardingKey() else DashboardKey() )
+                History.of(if (viewModel.shouldShowOnboarding) OnboardingKey() else DashboardKey())
             )
     }
 

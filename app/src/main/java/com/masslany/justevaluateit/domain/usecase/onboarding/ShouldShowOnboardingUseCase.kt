@@ -8,5 +8,5 @@ import javax.inject.Inject
 class ShouldShowOnboardingUseCase @Inject constructor(
     private val onboardingPreference: OnboardingPreference
 ) {
-     fun execute() = runBlocking { onboardingPreference.isFirstLaunch().first() }
+    fun execute() = runBlocking { onboardingPreference.isFirstLaunch().first() }
 }
