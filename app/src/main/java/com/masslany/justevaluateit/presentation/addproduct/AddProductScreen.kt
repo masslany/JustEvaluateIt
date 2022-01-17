@@ -43,7 +43,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import com.masslany.justevaluateit.R
 import com.masslany.justevaluateit.data.local.entity.Category
 import com.masslany.justevaluateit.data.local.entity.Product
@@ -57,12 +56,13 @@ import com.masslany.justevaluateit.presentation.ui.theme.FractionFourTenth
 import com.masslany.justevaluateit.presentation.ui.theme.PurpleGradientBrush
 import com.masslany.justevaluateit.presentation.ui.theme.SpaceMedium
 import com.masslany.justevaluateit.presentation.ui.theme.SpaceVeryLarge
+import com.zhuinden.simplestack.Backstack
 
 @ExperimentalComposeUiApi
 @Composable
 fun AddProductScreen(
-    navController: NavController,
     viewModel: AddProductViewModel,
+    backstack: Backstack,
 ) {
     val categories by viewModel.categories.collectAsState(initial = emptyList())
     val addProductState by viewModel.addProductState.observeAsState()
@@ -72,14 +72,14 @@ fun AddProductScreen(
         addProductState = addProductState,
         barcode = barcode,
         onBarcodeChanged = viewModel::onBarcodeChanged,
-        onNavigationIconClicked = { navController.popBackStack() },
+        onNavigationIconClicked = { backstack.goBack() },
         categories = categories,
         onCategoryChanged = viewModel::onCategoryChanged,
         onSaveProductButtonClicked = viewModel::onSaveProductButtonClicked,
         onSuccessfulAddingProduct = {
             // In the future navigate to the product page
             // For now pop back stack
-            navController.popBackStack()
+            backstack.goBack()
         },
         onBarcodeButtonClicked = viewModel::onBarcodeButtonClicked
     )
