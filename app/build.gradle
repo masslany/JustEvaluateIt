@@ -73,6 +73,9 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07'
     implementation 'androidx.compose.runtime:runtime-livedata:1.0.1'
 
+    // For 'by viewModels()'
+    implementation "androidx.navigation:navigation-fragment-ktx:2.3.5"
+
     // Hilt
     implementation "com.google.dagger:hilt-android:2.37"
     kapt "com.google.dagger:hilt-compiler:2.37"
