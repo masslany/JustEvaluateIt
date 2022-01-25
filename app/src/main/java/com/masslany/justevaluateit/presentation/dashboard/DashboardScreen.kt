@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.masslany.justevaluateit.R
+import com.masslany.justevaluateit.data.local.entity.Product
 import com.masslany.justevaluateit.presentation.addproduct.AddProductKey
 import com.masslany.justevaluateit.presentation.components.AppBar
 import com.masslany.justevaluateit.presentation.components.BarcodeButton
@@ -32,20 +33,24 @@ import com.masslany.justevaluateit.presentation.ui.theme.BarcodeButtonHeight
 import com.masslany.justevaluateit.presentation.ui.theme.FractionHalf
 import com.masslany.justevaluateit.presentation.ui.theme.SpaceMedium
 import com.zhuinden.simplestack.Backstack
+import kotlinx.coroutines.flow.Flow
 
 @ExperimentalComposeUiApi
 @Composable
 fun DashboardScreen(
     backstack: Backstack,
+    recentProducts: List<Product>,
 ) {
     DashboardScreen(
-        navigateToAddProduct = { backstack.goTo(AddProductKey()) }
+        recentProducts = recentProducts,
+        navigateToAddProduct = { backstack.goTo(AddProductKey()) },
     )
 }
 
 @Composable
 @Suppress("LongMethod")
-fun DashboardScreen(
+private fun DashboardScreen(
+    recentProducts: List<Product>,
     navigateToAddProduct: () -> Unit
 ) {
     var searchValue by remember { mutableStateOf("") }
@@ -116,7 +121,9 @@ fun DashboardScreen(
             modifier = Modifier
                 .padding(SpaceMedium)
                 .fillMaxWidth()
-                .fillMaxHeight()
+                .fillMaxHeight(),
+            products = recentProducts,
+            onItemClick = {},
         )
     }
 }

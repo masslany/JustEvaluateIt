@@ -3,6 +3,7 @@
 package com.masslany.justevaluateit.presentation.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -16,14 +17,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import com.masslany.justevaluateit.data.local.entity.Product
 import com.masslany.justevaluateit.presentation.ui.theme.SpaceMedium
 import com.masslany.justevaluateit.presentation.ui.theme.SpaceSmall
 
 @Composable
 fun RecentlyAdded(
     modifier: Modifier = Modifier,
-    list: List<String> = emptyList(), // TODO: Have domain class here
-    onItemClick: (String) -> Unit = {} // TODO: Here as well
+    products: List<Product> = emptyList(),
+    onItemClick: (Product) -> Unit = {}
 ) {
     Column(
         modifier = modifier
@@ -39,13 +41,16 @@ fun RecentlyAdded(
             modifier = Modifier.padding(SpaceMedium)
         )
         LazyColumn(modifier = Modifier.fillMaxWidth()) {
-            items(listOf(1, 2, 3, 4, 5, 6, 7)) { item ->
+            items(products) { item ->
                 Text(
-                    "Hello $item",
+                    text = item.name,
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(60.dp)
                         .padding(SpaceSmall)
+                        .clickable {
+                            onItemClick(item)
+                        }
                 )
             }
         }
