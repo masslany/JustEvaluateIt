@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DashboardViewModel @Inject constructor(
-   getRecentProductsUseCase: GetRecentProductsUseCase,
+    getRecentProductsUseCase: GetRecentProductsUseCase,
 ) : ViewModel() {
     var recentProducts by mutableStateOf(emptyList<Product>())
         private set

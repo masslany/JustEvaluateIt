@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
@@ -14,7 +13,6 @@ import androidx.fragment.app.viewModels
 import com.masslany.justevaluateit.presentation.ui.theme.JustEvaluateItTheme
 import com.zhuinden.simplestackextensions.fragmentsktx.backstack
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @ExperimentalComposeUiApi
 @AndroidEntryPoint

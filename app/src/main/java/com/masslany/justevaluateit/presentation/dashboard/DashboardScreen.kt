@@ -33,7 +33,6 @@ import com.masslany.justevaluateit.presentation.ui.theme.BarcodeButtonHeight
 import com.masslany.justevaluateit.presentation.ui.theme.FractionHalf
 import com.masslany.justevaluateit.presentation.ui.theme.SpaceMedium
 import com.zhuinden.simplestack.Backstack
-import kotlinx.coroutines.flow.Flow
 
 @ExperimentalComposeUiApi
 @Composable
