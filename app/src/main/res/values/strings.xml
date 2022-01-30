@@ -21,6 +21,7 @@
     <string name="dashboard">Dashboard</string>
     <string name="show_products">Show products</string>
     <string name="add_product">Add product</string>
+    <string name="recently_added">Recently added</string>
 
     <string name="welcome_to_app_name">Welcome to Just Evaluate It</string>
     <string name="welcome_additional_text">We need to setup few things first</string>
