@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.masslany.justevaluateit.R
+import com.masslany.justevaluateit.data.local.entity.Product
 import com.masslany.justevaluateit.presentation.components.AppBar
 import com.masslany.justevaluateit.presentation.components.BarcodeButton
 import com.masslany.justevaluateit.presentation.components.RecentlyAdded
@@ -33,6 +34,7 @@ import com.masslany.justevaluateit.presentation.ui.theme.SpaceMedium
 @Composable
 @Suppress("LongMethod")
 fun DashboardScreen(
+    recentProducts: List<Product>,
     navigateToAddProduct: () -> Unit
 ) {
     var searchValue by remember { mutableStateOf("") }
@@ -103,7 +105,9 @@ fun DashboardScreen(
             modifier = Modifier
                 .padding(SpaceMedium)
                 .fillMaxWidth()
-                .fillMaxHeight()
+                .fillMaxHeight(),
+            products = recentProducts,
+            onItemClick = {},
         )
     }
 }

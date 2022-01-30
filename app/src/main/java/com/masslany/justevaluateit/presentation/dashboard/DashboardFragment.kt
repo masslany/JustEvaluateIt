@@ -10,11 +10,14 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.masslany.justevaluateit.R
+import androidx.fragment.app.viewModels
 import com.masslany.justevaluateit.presentation.ui.theme.JustEvaluateItTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class DashboardFragment : Fragment() {
+
+    private val viewModel: DashboardViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,7 +34,8 @@ class DashboardFragment : Fragment() {
                         DashboardScreen(
                             navigateToAddProduct = {
                                 navController.navigate(R.id.action_dashboardFragment_to_addProductFragment)
-                            }
+                            },
+                            recentProducts = viewModel.recentProducts,
                         )
                     }
                 }

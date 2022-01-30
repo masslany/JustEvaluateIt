@@ -14,6 +14,10 @@ class ProductRepositoryImpl(
         return productDao.getAllProducts()
     }
 
+    override fun getRecentProducts(limit: Int): Flow<List<Product>> {
+        return productDao.getRecentProducts(limit)
+    }
+
     override suspend fun getProductByName(productName: String): List<Product> {
         return productDao.getProductByName(productName)
     }
