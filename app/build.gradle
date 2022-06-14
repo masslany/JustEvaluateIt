@@ -108,10 +108,6 @@ dependencies {
     // Kaiteki Barcode
     implementation "com.kroegerama:barcode-kaiteki:1.2.0"
 
-    // SimpleStack
-    implementation 'com.github.Zhuinden:simple-stack:2.6.2'
-    implementation 'com.github.Zhuinden:simple-stack-extensions:2.2.2'
-
     // ----- Tests -----
     // Tests
     testImplementation 'junit:junit:4.13.2'
