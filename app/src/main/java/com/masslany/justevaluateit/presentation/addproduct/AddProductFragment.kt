@@ -13,12 +13,12 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.Result
 import com.kroegerama.kaiteki.bcode.BarcodeResultListener
 import com.kroegerama.kaiteki.bcode.ui.showBarcodeAlertDialog
 import com.masslany.justevaluateit.presentation.ui.theme.JustEvaluateItTheme
+import com.zhuinden.simplestackextensions.fragmentsktx.backstack
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
@@ -49,7 +49,6 @@ class AddProductFragment : Fragment(), BarcodeResultListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val navController = findNavController()
 
         return ComposeView(requireContext()).apply {
             setContent {
@@ -57,7 +56,7 @@ class AddProductFragment : Fragment(), BarcodeResultListener {
                     Surface(color = MaterialTheme.colors.background) {
                         AddProductScreen(
                             viewModel = viewModel,
-                            navController = navController
+                            backstack = backstack,
                         )
                     }
                 }

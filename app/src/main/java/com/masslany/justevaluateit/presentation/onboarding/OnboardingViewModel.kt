@@ -3,8 +3,6 @@ package com.masslany.justevaluateit.presentation.onboarding
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.masslany.justevaluateit.data.local.entity.Category
 import com.masslany.justevaluateit.data.local.entity.Reviewer
 import com.masslany.justevaluateit.domain.usecase.category.AddCategoryUseCase
@@ -12,18 +10,20 @@ import com.masslany.justevaluateit.domain.usecase.category.GetAllCategoriesUseCa
 import com.masslany.justevaluateit.domain.usecase.onboarding.UpdateShowOnboardingUseCase
 import com.masslany.justevaluateit.domain.usecase.reviewer.AddReviewerUseCase
 import com.masslany.justevaluateit.domain.usecase.reviewer.GetAllReviewersUseCase
-import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@HiltViewModel
 class OnboardingViewModel @Inject constructor(
     private val addReviewerUseCase: AddReviewerUseCase,
     getAllReviewersUseCase: GetAllReviewersUseCase,
     private val addCategoryUseCase: AddCategoryUseCase,
     getAllCategoriesUseCase: GetAllCategoriesUseCase,
     private val updateShowOnboardingUseCase: UpdateShowOnboardingUseCase,
-) : ViewModel() {
+) {
+
+    private val scope = CoroutineScope(SupervisorJob())
 
     val reviewers = getAllReviewersUseCase.execute()
 
@@ -61,19 +61,19 @@ class OnboardingViewModel @Inject constructor(
     }
 
     fun onGetStartedButtonClicked() {
-        viewModelScope.launch {
+        scope.launch {
             updateShowOnboardingUseCase.execute(false)
         }
     }
 
     private fun addReviewer(reviewer: Reviewer) {
-        viewModelScope.launch {
+        scope.launch {
             addReviewerUseCase.execute(reviewer)
         }
     }
 
     private fun addCategory(category: Category) {
-        viewModelScope.launch {
+        scope.launch {
             addCategoryUseCase.execute(category)
         }
     }

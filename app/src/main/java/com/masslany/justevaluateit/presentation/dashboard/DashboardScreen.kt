@@ -18,6 +18,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -31,6 +32,7 @@ import com.masslany.justevaluateit.presentation.ui.theme.BarcodeButtonHeight
 import com.masslany.justevaluateit.presentation.ui.theme.FractionHalf
 import com.masslany.justevaluateit.presentation.ui.theme.SpaceMedium
 
+@ExperimentalComposeUiApi
 @Composable
 @Suppress("LongMethod")
 fun DashboardScreen(

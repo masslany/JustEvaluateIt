@@ -14,7 +14,7 @@
         android:theme="@style/Theme.JustEvaluateIt"
         android:windowSoftInputMode="adjustResize">
         <activity
-            android:name=".presentation.MainActivity"
+            android:name=".presentation.mainactivity.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.JustEvaluateIt.NoActionBar">
