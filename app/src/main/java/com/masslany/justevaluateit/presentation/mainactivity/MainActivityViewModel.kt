@@ -1,4 +1,4 @@
-package com.masslany.justevaluateit.presentation
+package com.masslany.justevaluateit.presentation.mainactivity
 
 import androidx.lifecycle.ViewModel
 import com.masslany.justevaluateit.domain.usecase.onboarding.ShouldShowOnboardingUseCase
